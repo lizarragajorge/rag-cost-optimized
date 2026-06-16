@@ -289,6 +289,39 @@ input {
   margin-top: 10px;
 }
 
+.token-note {
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 12px;
+  background: #fffefb;
+}
+
+.token-note h3 {
+  margin: 0 0 8px;
+  color: var(--accent-2);
+}
+
+.token-note p {
+  margin: 0 0 8px;
+  line-height: 1.5;
+}
+
+.token-note ul {
+  margin: 0;
+  padding-left: 20px;
+  line-height: 1.45;
+}
+
+.token-note li {
+  margin: 6px 0;
+}
+
+.small-note {
+  margin-top: 10px;
+  font-size: 12px;
+}
+
 .comparison-wrap {
   margin-top: 10px;
   overflow-x: auto;
@@ -410,7 +443,6 @@ input {
 .priority-card.p0 { border-left-color: #bf3e25; }
 .priority-card.p1 { border-left-color: #d9871b; }
 .priority-card.p2 { border-left-color: #246b3b; }
-.priority-card.p3 { border-left-color: #0f5d8b; }
 
 .matrix-row {
   margin-top: 8px;

@@ -74,10 +74,10 @@
       <article class="panel reveal">
         <h2>After: platform-friendly pattern</h2>
         <ul class="checklist good">
-          <li>Managed refresh endpoint does incremental indexing</li>
+          <li>Copilot Studio stays focused on grounded answer experience</li>
           <li>Hash-based doc and chunk reuse cuts embedding calls</li>
-          <li>Power Automate or Logic Apps trigger the endpoint</li>
-          <li>Each run returns cost, token, and reliability signals</li>
+          <li>Azure AI Search indexing configuration is tuned for lower-cost refreshes</li>
+          <li>Each refresh path is validated for cost, citations, and answer consistency</li>
         </ul>
       </article>
     </section>
@@ -128,6 +128,24 @@ cost_usd, duration_ms</code></pre>
           Refreshes per year
           <input id="refreshInput" type="number" min="1" max="8760" step="1" value="365" />
         </label>
+      </div>
+      <div class="token-note">
+        <h3>Why start with 1,200,000,000 tokens?</h3>
+        <p>
+          This default is meant to approximate a mid-sized enterprise knowledge base,
+          not a small demo corpus. A practical rule of thumb is that <strong>1 GB of English-heavy text often lands around 200M to 250M tokens</strong>
+          after extraction, depending on formatting noise, tables, and duplication.
+        </p>
+        <ul>
+          <li><strong>100 GB raw files</strong> does not mean 100 GB of useful text. Most teams size from extracted text, not storage size.</li>
+          <li><strong>5 GB extracted text</strong> at roughly 240M tokens per GB is about <strong>1.2B tokens</strong>.</li>
+          <li><strong>10 GB extracted text</strong> is often closer to <strong>2.1B to 2.4B tokens</strong>.</li>
+          <li><strong>Heavy overlap and OCR noise</strong> can push the effective token count higher than expected.</li>
+        </ul>
+        <p class="muted small-note">
+          If you only know document storage size, start by estimating the extracted-text portion first, then convert to tokens.
+          This keeps the calculator closer to real embedding cost.
+        </p>
       </div>
       <div class="calc-actions">
         <button id="btnEstimate" class="btn primary">Recalculate</button>
@@ -209,8 +227,8 @@ cost_usd, duration_ms</code></pre>
           <h3>3. Team operating model</h3>
           <ol>
             <li>Copilot Studio stays focused on authoring and responses.</li>
-            <li>Power Automate triggers scheduled and manual refresh.</li>
-            <li>Ops monitors run summaries, not raw indexing internals.</li>
+            <li>Azure AI Search handles indexing and grounding configuration close to the knowledge source.</li>
+            <li>Teams validate answer quality in Copilot Studio using the same golden question set after changes.</li>
           </ol>
         </article>
       </div>
@@ -277,36 +295,6 @@ cleanText() -> chunk() -> embed()</code></pre>
           <p class="card-cta">Open deep dive</p>
         </article>
 
-        <article class="priority-card p1 clickable-card" role="link" tabindex="0" data-href="/static/deepdives/p1-observability-governance.html">
-          <h3>P1: Observability and governance</h3>
-          <div class="matrix-row">
-            <h4>Current</h4>
-            <p>Limited visibility into per-run token usage and cost by source/indexer.</p>
-            <pre class="mini-code"><code># Today: aggregate cloud bill only
-# Missing: run-level attribution</code></pre>
-          </div>
-          <div class="matrix-row">
-            <h4>Recommendation</h4>
-            <p>Return run telemetry for every refresh: docs changed, chunks embedded, tokens, cost, duration, failures.</p>
-            <pre class="mini-code"><code>{
-  "runId": "...",
-  "tokensEmbedded": 0,
-  "costUsd": 0.0,
-  "failedItems": 0
-}</code></pre>
-          </div>
-          <div class="matrix-row">
-            <h4>Why</h4>
-            <p>Teams cannot manage or forecast cost without run-level telemetry and ownership signals.</p>
-            <ul class="detail-list">
-              <li>Enables anomaly detection by source and run</li>
-              <li>Supports weekly quality + FinOps reviews</li>
-              <li>Turns optimization into measurable outcomes</li>
-            </ul>
-          </div>
-          <p class="card-cta">Open deep dive</p>
-        </article>
-
         <article class="priority-card p2 clickable-card" role="link" tabindex="0" data-href="/static/deepdives/p2-reliability-hardening.html">
           <h3>P2: Answer consistency and accuracy</h3>
           <div class="matrix-row">
@@ -323,6 +311,7 @@ cleanText() -> chunk() -> embed()</code></pre>
   citationPassRate: ">= 95%",
   contradictionRate: "<= 2%"
 }</code></pre>
+            <p class="mini-note">Keep the golden question set in source control as JSON or CSV so every model/chunking change is tested against the same questions.</p>
           </div>
           <div class="matrix-row">
             <h4>Why</h4>
@@ -336,35 +325,6 @@ cleanText() -> chunk() -> embed()</code></pre>
           <p class="card-cta">Open deep dive</p>
         </article>
 
-        <article class="priority-card p3 clickable-card" role="link" tabindex="0" data-href="/static/deepdives/p3-strategic-optimization.html">
-          <h3>P3: Strategic optimization</h3>
-          <div class="matrix-row">
-            <h4>Current</h4>
-            <p>One broad index and enrichment profile handles many source types and use cases.</p>
-            <pre class="mini-code"><code># one-index-for-all pattern
-index: regulatory-all
-sources: many domains</code></pre>
-          </div>
-          <div class="matrix-row">
-            <h4>Recommendation</h4>
-            <p>Partition by domain when needed, rationalize enrichment skills, and use tiered refresh cadence by content volatility.</p>
-            <pre class="mini-code"><code>refreshPolicy = {
-  highVolatility: "daily",
-  medium: "weekly",
-  archive: "monthly"
-}</code></pre>
-          </div>
-          <div class="matrix-row">
-            <h4>Why</h4>
-            <p>Improves long-term operability and relevance while containing unnecessary enrichment work.</p>
-            <ul class="detail-list">
-              <li>Better precision by domain-specific retrieval</li>
-              <li>Lower long-term enrichment overhead</li>
-              <li>Cleaner ownership boundaries across teams</li>
-            </ul>
-          </div>
-          <p class="card-cta">Open deep dive</p>
-        </article>
       </div>
     </section>
   </main>

@@ -68,15 +68,79 @@
     </section>
 
     <section class="panel">
+      <h2>Where the golden question set should live</h2>
+      <div class="grid-3">
+        <article class="card current">
+          <h3>Recommended location</h3>
+          <p>Keep it in source control beside the ingestion or evaluation assets so it changes with the solution, not in a personal spreadsheet.</p>
+        </article>
+        <article class="card recommended">
+          <h3>Practical formats</h3>
+          <p>Use JSON for structured automation or CSV for easier editing by content owners. Either works as long as the schema stays stable.</p>
+        </article>
+        <article class="card why">
+          <h3>Ownership</h3>
+          <p>Product/content owners define the questions. Platform or engineering automates execution and score reporting.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Example schema</h2>
+      <div class="grid-3">
+        <article class="card">
+          <h3>JSON example</h3>
+          <pre><code>{
+  "id": "reg-001",
+  "question": "What is the approved late fee percentage?",
+  "mustCite": true,
+  "expectedSources": ["late-fee-policy.pdf"],
+  "expectedAnswerContains": ["approved", "late fee"],
+  "notes": "Numeric/policy claim"
+}</code></pre>
+        </article>
+        <article class="card">
+          <h3>Minimum fields</h3>
+          <pre><code>- id
+- question
+- mustCite
+- expectedSources
+- expectedAnswerContains
+- notes</code></pre>
+        </article>
+        <article class="card">
+          <h3>Optional scoring fields</h3>
+          <pre><code>- forbiddenSources
+- allowedValuePatterns
+- topic
+- owner
+- severity</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
       <h2>How to implement</h2>
       <ol class="steps">
-        <li>Build a golden question set from real user prompts and known reference answers.</li>
-        <li>Add automated checks after refresh: citation presence, citation relevance, contradiction detection.</li>
-        <li>Update answer instructions to force explicit handling of multiple values and uncertainty.</li>
-        <li>Create a weekly quality scorecard: consistency rate, citation pass rate, contradiction rate.</li>
-        <li>Gate production promotion on passing quality thresholds, not just successful indexing completion.</li>
+        <li>Start with 20-30 real business questions that already have known answers in the source material.</li>
+        <li>Store them in a versioned JSON or CSV file in the repo or evaluation project.</li>
+        <li>After every indexing, chunking, or model change, run the same set through Copilot Studio test pane, an agent playground, or an automated API harness.</li>
+        <li>Score each result for citation presence, citation relevance, answer consistency, and contradiction handling.</li>
+        <li>Promote changes only if the score stays within the agreed threshold.</li>
       </ol>
-      <p class="note">Tip: start with your top 20 business-critical questions and optimize for repeatability first.</p>
+      <p class="note">Tip: start with your top 20 business-critical questions and optimize for repeatability first. Add new questions whenever users challenge an answer in production.</p>
+    </section>
+
+    <section class="panel">
+      <h2>How to run it in practice</h2>
+      <ol class="steps">
+        <li>Run the golden questions before making a change and save the baseline results.</li>
+        <li>Apply the change, such as lower overlap or a different embedding model.</li>
+        <li>Run the same questions again.</li>
+        <li>Compare output side by side: did the answer stay correct, did citations stay relevant, did contradictions appear?</li>
+        <li>Record pass/fail and keep the result set for audit and troubleshooting.</li>
+      </ol>
+      <p class="note">A simple first version can be manual in Copilot Studio. A better long-term version is an automated harness that posts each question to the agent and scores the response.</p>
     </section>
 
     <section class="panel">
@@ -88,11 +152,7 @@
       </div>
     </section>
 
-    <section class="panel">
-      <button class="copy-link">Copy page link</button>
-    </section>
   </main>
 
-  <script src="/static/deepdives/deepdive.js"></script>
 </body>
 </html>

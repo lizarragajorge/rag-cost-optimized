@@ -25,8 +25,8 @@ Use this guide when your solution has one or more of the following symptoms:
 
 Recommended operating split:
 - Copilot Studio handles authoring and conversation experience
-- A managed refresh service handles indexing logic and guardrails
-- Automation (Power Automate or Logic Apps) triggers refresh schedules
+- Azure AI Search handles indexing and grounding configuration close to the knowledge source
+- Teams validate answer quality in Copilot Studio against a fixed question set after changes
 
 ## Priority Improvement Plan
 
@@ -84,34 +84,6 @@ Why this matters:
 - reduces duplicated embedding tokens
 - improves retrieval precision and citation quality
 
-### P1: Observability and governance
-
-Current pattern:
-- aggregate cloud billing exists
-- run-level attribution is limited
-
-Recommended pattern:
-- emit run-level telemetry for every refresh
-- track by source profile and publish periodic scorecards
-
-Recommended run output shape:
-```json
-{
-  "runId": "...",
-  "documentsSeen": 0,
-  "documentsSkipped": 0,
-  "chunksEmbedded": 0,
-  "tokensEmbedded": 0,
-  "estimatedCostUsd": 0.0,
-  "durationMs": 0,
-  "failedItems": 0
-}
-```
-
-Why this matters:
-- enables cost anomaly detection
-- supports quality and FinOps governance
-
 ### P2: Answer consistency and accuracy
 
 Current pattern:
@@ -137,31 +109,6 @@ Implementation notes:
 Why this matters:
 - improves user trust and answer reliability
 - reduces escalation due to contradictory responses
-
-### P3: Strategic optimization
-
-Current pattern:
-- one broad index and enrichment profile for mixed domains
-
-Recommended pattern:
-- segment by domain when needed
-- apply tiered refresh cadence by content volatility
-- remove enrichment outputs that are not used in retrieval
-
-Implementation notes:
-```json
-{
-  "refreshPolicy": {
-    "highVolatility": "daily",
-    "mediumVolatility": "weekly",
-    "archive": "monthly"
-  }
-}
-```
-
-Why this matters:
-- improves long-term maintainability and relevance quality
-- contains unnecessary enrichment overhead
 
 ## Cost Estimation Model
 
@@ -203,6 +150,33 @@ Validate both retrieval and answer behavior across these layers:
 
 4. Internal API test harness
 - run regression checks after indexing/model/chunking changes
+
+## Golden Question Sets
+
+Golden question sets are a fixed list of business-relevant prompts used to validate answer quality after indexing, chunking, or model changes.
+
+Recommended storage:
+- keep the file in source control
+- use JSON or CSV
+- keep schema stable across releases
+
+Recommended minimum fields:
+- `id`
+- `question`
+- `mustCite`
+- `expectedSources`
+- `expectedAnswerContains`
+- `notes`
+
+Example artifact:
+- `docs/golden-questions.example.json`
+
+Recommended manual workflow:
+1. store the golden questions in a versioned file
+2. make the indexing, chunking, or model change
+3. open Copilot Studio test pane
+4. run the same questions manually
+5. record pass/fail for correctness, citations, and contradiction handling
 
 ## Quality Gate Checklist
 

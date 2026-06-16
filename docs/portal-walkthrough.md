@@ -13,7 +13,7 @@ This document describes how to configure Azure AI Search, Azure AI Foundry, and 
 1. Azure AI Foundry resource and project
 2. Azure OpenAI model deployments
 3. Azure AI Search service and index
-4. Refresh pipeline that populates and updates the index
+4. Azure AI Search indexing configuration and content refresh path
 5. Copilot Studio configured to use the index as a knowledge source
 
 ## 1. Provision Azure Resources
@@ -72,7 +72,7 @@ In Azure AI Foundry:
 
 ## 4. Populate and Verify Azure AI Search Index
 
-Use your ingestion pipeline to write chunks and vectors into the target index.
+Use your indexing path to write chunks and vectors into the target index.
 
 Example local run pattern:
 
@@ -125,13 +125,27 @@ Use Copilot Studio test pane to validate:
 
 Run a golden question set after indexing/model/chunking changes.
 
+### 6.4 Manual validation workflow
+
+For a simple first implementation:
+
+1. Keep a golden question set in source control as JSON or CSV.
+2. Make the indexing, chunking, or model change.
+3. Open the Copilot Studio test pane.
+4. Run the same questions manually.
+5. Record pass/fail for:
+   - answer correctness
+   - citation presence
+   - citation relevance
+   - contradiction handling
+
 ## 7. Cost and Quality Optimization Recommendations
 
 1. Use smaller embedding model by default unless quality evaluation requires a larger model.
 2. Use incremental refresh instead of broad/full re-index.
 3. Tune chunk overlap to reduce duplicate token embedding.
 4. Remove low-signal extraction artifacts before embedding.
-5. Track per-run telemetry (tokens, cost estimate, skipped docs, failures).
+5. Validate every significant change against the same golden question set.
 
 ## 8. Troubleshooting
 

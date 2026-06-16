@@ -1,0 +1,45 @@
+[
+  {
+    "id": "policy-001",
+    "question": "What is the approved late fee percentage?",
+    "mustCite": true,
+    "expectedSources": [
+      "late-fee-policy.pdf"
+    ],
+    "expectedAnswerContains": [
+      "approved",
+      "late fee"
+    ],
+    "notes": "Numeric or policy answer. Citation required.",
+    "severity": "high"
+  },
+  {
+    "id": "ops-002",
+    "question": "When should meter inspections be completed after a service interruption?",
+    "mustCite": true,
+    "expectedSources": [
+      "service-restoration-procedure.docx"
+    ],
+    "expectedAnswerContains": [
+      "inspection",
+      "service interruption"
+    ],
+    "notes": "Operational timing question.",
+    "severity": "medium"
+  },
+  {
+    "id": "reg-003",
+    "question": "Which filing contains the final approved value rather than a proposed value?",
+    "mustCite": true,
+    "expectedSources": [
+      "commission-order.pdf",
+      "settlement-agreement.pdf"
+    ],
+    "expectedAnswerContains": [
+      "final approved",
+      "proposed"
+    ],
+    "notes": "Conflict-handling question. Response should distinguish draft vs final values.",
+    "severity": "high"
+  }
+]
