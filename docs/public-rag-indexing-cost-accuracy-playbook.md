@@ -8,6 +8,43 @@ It is written for teams using:
 
 It explains how to reduce indexing cost while improving answer consistency and citation accuracy.
 
+## Public Demo Walkthrough (8-10 minutes)
+Use this if you are presenting the approach to another team.
+
+1. Start with the problem in one sentence.
+- "We are paying full-price indexing repeatedly even when only a small portion of content changes."
+
+2. Show the cost model quickly.
+- Explain that indexing cost is driven by embedded tokens and model price.
+- State that two levers matter most: model choice and amount of content re-embedded.
+
+3. Explain the before/after operating pattern.
+- Before: broad/full refresh behavior and expensive embedding defaults.
+- After: incremental refresh + right-sized embedding model + quality gates.
+
+4. Walk through priorities (P0 to P3).
+- P0: immediate savings and control
+- P1: tuning + observability
+- P2: answer consistency and citation accuracy
+- P3: strategic scale optimization
+
+5. Demonstrate where quality is tested.
+- Copilot Studio test pane for end-user answers
+- Search Explorer for retrieval quality
+- Optional agent playground and API harness for regression checks
+
+6. Close with rollout plan.
+- Week 1: baseline cost + quality
+- Week 2: incremental default path
+- Week 3: model/chunking A/B validation
+- Week 4: production gates and scorecards
+
+## Repo References (Safe to share)
+- Main project overview: `README.md`
+- Suggested baseline demo flow: `README.md` section "Suggested demo flow"
+- Portal walkthrough notes: `docs/portal-walkthrough.md`
+- Public playbook (this doc): `docs/public-rag-indexing-cost-accuracy-playbook.md`
+
 ## Audience
 - Product owners and platform teams operating enterprise RAG
 - Teams seeing high recurring indexing costs

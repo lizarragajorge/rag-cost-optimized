@@ -438,6 +438,30 @@ input {
   color: var(--ink);
 }
 
+.mini-code {
+  margin: 8px 0 0;
+  padding: 8px;
+  border-radius: 8px;
+  background: #18222b;
+  color: #d5e9ff;
+  border: 1px solid #2b3a47;
+  font-size: 11px;
+  line-height: 1.35;
+  overflow-x: auto;
+  white-space: pre;
+  font-family: Consolas, "Courier New", monospace;
+}
+
+.detail-list {
+  margin: 8px 0 0;
+  padding-left: 18px;
+  line-height: 1.4;
+}
+
+.detail-list li {
+  margin: 4px 0;
+}
+
 .card-cta {
   margin: 10px 0 0;
   font-size: 12px;

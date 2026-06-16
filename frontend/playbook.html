@@ -25,7 +25,7 @@
       <p class="eyebrow">For Copilot Studio + Azure AI Search teams</p>
       <h1>Cut re-index spend while improving reliability</h1>
       <p class="lead">
-        Use this page as your walkthrough script. It explains what to change,
+        Use this page as your walkthrough guide. It explains what to change,
         why it lowers cost, and what operating pattern keeps the system stable.
       </p>
       <div class="hero-actions">
@@ -226,14 +226,25 @@ cost_usd, duration_ms</code></pre>
           <div class="matrix-row">
             <h4>Current</h4>
             <p>Embedding skill uses text-embedding-3-large at 3072 dimensions and runs broad refresh operations.</p>
+            <pre class="mini-code"><code>"deploymentId": "text-embedding-3-large"
+"dimensions": 3072</code></pre>
           </div>
           <div class="matrix-row">
             <h4>Recommendation</h4>
             <p>Default to text-embedding-3-small and make incremental refresh the standard run path.</p>
+            <pre class="mini-code"><code>"deploymentId": "text-embedding-3-small"
+"dimensions": 1536
+
+POST /refresh/incremental</code></pre>
           </div>
           <div class="matrix-row">
             <h4>Why</h4>
             <p>This is the largest cost lever. Spend should scale with changed content, not total corpus size.</p>
+            <ul class="detail-list">
+              <li>Fastest path to visible cost reduction</li>
+              <li>Usually low regression risk with a quality gate</li>
+              <li>Keeps full rebuild available only for migrations</li>
+            </ul>
           </div>
           <p class="card-cta">Open deep dive</p>
         </article>
@@ -243,14 +254,25 @@ cost_usd, duration_ms</code></pre>
           <div class="matrix-row">
             <h4>Current</h4>
             <p>Chunking config uses high overlap (3500 page length, 600 overlap), and chunks include low-value OCR artifacts.</p>
+            <pre class="mini-code"><code>"maximumPageLength": 3500
+"pageOverlapLength": 600</code></pre>
           </div>
           <div class="matrix-row">
             <h4>Recommendation</h4>
             <p>Reduce overlap, clean noisy text before embedding, and keep a fixed quality evaluation set.</p>
+            <pre class="mini-code"><code>"maximumPageLength": 2500-3000
+"pageOverlapLength": 250-450
+
+cleanText() -> chunk() -> embed()</code></pre>
           </div>
           <div class="matrix-row">
             <h4>Why</h4>
             <p>Lower overlap and cleaner content reduce duplicate tokens while preserving retrieval quality.</p>
+            <ul class="detail-list">
+              <li>Less duplicate context means fewer embedding tokens</li>
+              <li>Cleaner chunks produce better citations</li>
+              <li>Improves both cost and answer precision</li>
+            </ul>
           </div>
           <p class="card-cta">Open deep dive</p>
         </article>
@@ -260,14 +282,27 @@ cost_usd, duration_ms</code></pre>
           <div class="matrix-row">
             <h4>Current</h4>
             <p>Limited visibility into per-run token usage and cost by source/indexer.</p>
+            <pre class="mini-code"><code># Today: aggregate cloud bill only
+# Missing: run-level attribution</code></pre>
           </div>
           <div class="matrix-row">
             <h4>Recommendation</h4>
             <p>Return run telemetry for every refresh: docs changed, chunks embedded, tokens, cost, duration, failures.</p>
+            <pre class="mini-code"><code>{
+  "runId": "...",
+  "tokensEmbedded": 0,
+  "costUsd": 0.0,
+  "failedItems": 0
+}</code></pre>
           </div>
           <div class="matrix-row">
             <h4>Why</h4>
             <p>Teams cannot manage or forecast cost without run-level telemetry and ownership signals.</p>
+            <ul class="detail-list">
+              <li>Enables anomaly detection by source and run</li>
+              <li>Supports weekly quality + FinOps reviews</li>
+              <li>Turns optimization into measurable outcomes</li>
+            </ul>
           </div>
           <p class="card-cta">Open deep dive</p>
         </article>
@@ -277,14 +312,26 @@ cost_usd, duration_ms</code></pre>
           <div class="matrix-row">
             <h4>Current</h4>
             <p>Answer quality can vary across runs, and conflicting values are not always clearly separated in responses.</p>
+            <pre class="mini-code"><code># Symptom examples
+- same question, different answer wording
+- numeric claims without strong citation</code></pre>
           </div>
           <div class="matrix-row">
             <h4>Recommendation</h4>
             <p>Add quality gates: golden question set, citation checks, and conflict-aware response guidance before promoting refresh changes.</p>
+            <pre class="mini-code"><code>qualityGate = {
+  citationPassRate: ">= 95%",
+  contradictionRate: "<= 2%"
+}</code></pre>
           </div>
           <div class="matrix-row">
             <h4>Why</h4>
             <p>This directly improves trust: users get repeatable, evidence-backed answers instead of variable interpretations.</p>
+            <ul class="detail-list">
+              <li>More consistent stakeholder experience</li>
+              <li>Fewer escalations for contradictory answers</li>
+              <li>Clear promotion criteria for index changes</li>
+            </ul>
           </div>
           <p class="card-cta">Open deep dive</p>
         </article>
@@ -294,14 +341,27 @@ cost_usd, duration_ms</code></pre>
           <div class="matrix-row">
             <h4>Current</h4>
             <p>One broad index and enrichment profile handles many source types and use cases.</p>
+            <pre class="mini-code"><code># one-index-for-all pattern
+index: regulatory-all
+sources: many domains</code></pre>
           </div>
           <div class="matrix-row">
             <h4>Recommendation</h4>
             <p>Partition by domain when needed, rationalize enrichment skills, and use tiered refresh cadence by content volatility.</p>
+            <pre class="mini-code"><code>refreshPolicy = {
+  highVolatility: "daily",
+  medium: "weekly",
+  archive: "monthly"
+}</code></pre>
           </div>
           <div class="matrix-row">
             <h4>Why</h4>
             <p>Improves long-term operability and relevance while containing unnecessary enrichment work.</p>
+            <ul class="detail-list">
+              <li>Better precision by domain-specific retrieval</li>
+              <li>Lower long-term enrichment overhead</li>
+              <li>Cleaner ownership boundaries across teams</li>
+            </ul>
           </div>
           <p class="card-cta">Open deep dive</p>
         </article>

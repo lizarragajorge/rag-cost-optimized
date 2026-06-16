@@ -66,7 +66,7 @@ uvicorn app.main:app --reload --host 0.0.0.0 --port 8000
 
 ---
 
-## Demo script (suggested)
+## Suggested Demo Walkthrough
 
 1. **Open the app.** Sample corpus is auto-loaded.
 2. Click **"Naive Full Re-index"** — note the cost (e.g. `$0.0142`, `~71k tokens`).
