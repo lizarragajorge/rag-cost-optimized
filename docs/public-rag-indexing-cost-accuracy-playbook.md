@@ -28,6 +28,27 @@ Recommended operating split:
 - Azure AI Search handles indexing and grounding configuration close to the knowledge source
 - Teams validate answer quality in Copilot Studio against a fixed question set after changes
 
+## Observed Gaps in Common Implementations
+
+The following patterns frequently appear in enterprise RAG implementations and often lead to higher cost or lower answer quality.
+
+1. Broad refresh behavior instead of true incremental reuse
+- A refresh pipeline may reprocess large portions of the corpus even when only a small percentage changed.
+
+2. Larger embedding model selected by default
+- A higher-cost embedding model is sometimes used without first validating whether a smaller model meets retrieval needs.
+
+3. High chunk overlap
+- Overlap settings can increase duplicated tokens and inflate embedding cost.
+
+4. Low-signal extracted text is embedded
+- OCR artifacts, repeated file markers, or boilerplate content may be embedded even though they add little retrieval value.
+
+5. Formal answer-quality gates are missing
+- Solutions often rely on ad hoc testing instead of fixed question sets, citation checks, and contradiction review.
+
+These gaps are not specific to any one product, tenant, or implementation. They are recurring patterns that can be addressed through model right-sizing, chunk tuning, content cleanup, and repeatable validation.
+
 ## Priority Improvement Plan
 
 ### P0: Immediate savings and control
@@ -84,6 +105,44 @@ Why this matters:
 - reduces duplicated embedding tokens
 - improves retrieval precision and citation quality
 
+## Best Practices for Low-Signal Extracted Text
+
+Low-signal extracted text should be removed before chunking and embedding whenever possible.
+
+Common low-signal patterns:
+- repeated image or attachment file markers
+- boilerplate headers and footers repeated on every page
+- OCR artifacts and scanning noise
+- duplicate whitespace blocks and broken line wraps
+- page numbers and navigation fragments that do not help retrieval
+
+Recommended practices:
+1. clean text before chunking, not after embedding
+2. remove repeated file-marker lines and obvious extraction artifacts
+3. normalize whitespace and line breaks before hashing and chunking
+4. preserve meaningful labels, tables, and section names if they are useful for retrieval
+5. validate cleanup rules against a fixed question set before rollout
+
+Example cleanup flow:
+
+```text
+extract -> cleanText -> chunk -> embed -> index
+```
+
+Example cleanup rules:
+
+```text
+- remove repeated image*.png style lines
+- collapse duplicate blank lines
+- remove repeated document headers/footers
+- keep semantic headings and policy labels
+```
+
+Validation guidance:
+- compare token volume before and after cleanup
+- verify that citations still point to the expected documents
+- verify that answer quality does not regress for key business questions
+
 ### P2: Answer consistency and accuracy
 
 Current pattern:
@@ -109,6 +168,48 @@ Implementation notes:
 Why this matters:
 - improves user trust and answer reliability
 - reduces escalation due to contradictory responses
+
+## Best Practices for Answer-Quality Gates
+
+Answer-quality gates should be applied before promoting indexing, chunking, or model changes.
+
+Recommended gate categories:
+1. answer correctness
+2. citation presence
+3. citation relevance
+4. contradiction handling
+5. consistency across repeated prompts
+
+Recommended minimum thresholds:
+
+```json
+{
+  "citationPassRate": ">= 95%",
+  "contradictionRate": "<= 2%",
+  "criticalQuestionPassRate": ">= 95%"
+}
+```
+
+Recommended workflow:
+1. maintain a golden question set in source control
+2. run the same questions after every material change
+3. score the results against the gate categories
+4. block promotion if thresholds are not met
+5. add newly discovered failure cases back into the golden question set
+
+Manual execution path:
+1. open the Copilot Studio test pane
+2. run the golden questions one by one
+3. record pass/fail in a shared tracker
+4. compare against the previous baseline
+
+Recommended tracker fields:
+- question id
+- answer correct
+- citation present
+- citation relevant
+- contradiction handled
+- notes
 
 ## Cost Estimation Model
 

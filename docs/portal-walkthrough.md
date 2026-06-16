@@ -147,6 +147,36 @@ For a simple first implementation:
 4. Remove low-signal extraction artifacts before embedding.
 5. Validate every significant change against the same golden question set.
 
+### 7.1 Low-signal text cleanup
+
+Apply cleanup before chunking and embedding.
+
+Examples:
+- repeated image or attachment markers
+- duplicated headers and footers
+- OCR artifacts and repeated whitespace
+
+Recommended sequence:
+
+```text
+extract -> cleanText -> chunk -> embed -> index
+```
+
+### 7.2 Answer-quality gates
+
+Use a fixed question set to validate changes.
+
+Recommended checks:
+- answer correctness
+- citation presence
+- citation relevance
+- contradiction handling
+
+Recommended first implementation:
+1. keep the golden questions in JSON or CSV in source control
+2. run them manually in Copilot Studio test pane after changes
+3. record pass/fail in a shared tracker
+
 ## 8. Troubleshooting
 
 ### Symptom: grounded answers fail with forbidden errors
