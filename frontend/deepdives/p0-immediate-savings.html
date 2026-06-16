@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>P0 Deep Dive - Immediate savings and risk control</title>
+  <link rel="stylesheet" href="/static/deepdives/deepdive.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <div class="brand">Priority Deep Dive</div>
+      <nav class="nav">
+        <a href="/static/playbook.html">Back to Playbook</a>
+        <a href="/">Live Demo</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">P0</p>
+      <h1>Immediate savings and risk control</h1>
+      <p class="lede">Change the highest-cost behavior first: full refresh runs with expensive embeddings. This item alone usually moves the budget curve quickly.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Current vs Recommended</h2>
+      <div class="grid-3">
+        <article class="card current">
+          <h3>What they are doing now</h3>
+          <p>Embedding skill uses text-embedding-3-large and broad refresh operations can reprocess large portions of the corpus.</p>
+        </article>
+        <article class="card recommended">
+          <h3>More cost-effective way</h3>
+          <p>Default to text-embedding-3-small and make incremental refresh the standard path; full rebuild only for schema/model migration events.</p>
+        </article>
+        <article class="card why">
+          <h3>Why this works</h3>
+          <p>Cost scales with embedding tokens. The fastest savings come from reducing model unit cost and reducing re-embedded volume.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Reference snippet and target state</h2>
+      <div class="grid-3">
+        <article class="card">
+          <h3>Current snippet</h3>
+          <pre><code>"@odata.type": "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill"
+"deploymentId": "text-embedding-3-large"
+"dimensions": 3072</code></pre>
+        </article>
+        <article class="card">
+          <h3>Target snippet</h3>
+          <pre><code>"deploymentId": "text-embedding-3-small"
+"dimensions": 1536
+
+// then run incremental refresh by default</code></pre>
+        </article>
+        <article class="card">
+          <h3>Guardrail</h3>
+          <pre><code>POST /refresh/incremental
+{
+  "sourceProfile": "sharepoint-regulatory",
+  "dryRun": false
+}</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>How to implement</h2>
+      <ol class="steps">
+        <li>Create a shadow index for A/B validation (small vs large model quality check).</li>
+        <li>Update embedding deployment in skillset or pipeline to text-embedding-3-small.</li>
+        <li>Move production refresh trigger to incremental endpoint only.</li>
+        <li>Add approval policy for full rebuild runs.</li>
+        <li>Publish weekly report showing run cost trend before/after change.</li>
+      </ol>
+      <p class="note">Tip: treat this as a release with rollback criteria based on answer quality and citation correctness.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Expected impact</h2>
+      <div class="impact">
+        <article class="kpi"><div class="label">Cost reduction potential</div><div class="value">Very high</div></article>
+        <article class="kpi"><div class="label">Delivery effort</div><div class="value">Medium</div></article>
+        <article class="kpi"><div class="label">Time to value</div><div class="value">1-2 weeks</div></article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <button class="copy-link">Copy page link</button>
+    </section>
+  </main>
+
+  <script src="/static/deepdives/deepdive.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+{
+  "eTag": null,
+  "id": "subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/providers/Microsoft.CostManagement/query/b15ddd86-d123-4ce7-b9b0-56462284d87e",
+  "location": null,
+  "name": "b15ddd86-d123-4ce7-b9b0-56462284d87e",
+  "properties": {
+    "columns": [
+      {
+        "name": "Cost",
+        "type": "Number"
+      },
+      {
+        "name": "ServiceName",
+        "type": "String"
+      },
+      {
+        "name": "Currency",
+        "type": "String"
+      }
+    ],
+    "nextLink": null,
+    "rows": [
+      [
+        310.68576,
+        "API Management",
+        "USD"
+      ],
+      [
+        0.0,
+        "Azure App Service",
+        "USD"
+      ],
+      [
+        604.112,
+        "Azure Cognitive Search",
+        "USD"
+      ],
+      [
+        8.6931948646903e-05,
+        "Azure Cosmos DB",
+        "USD"
+      ],
+      [
+        50.3323408940956,
+        "Azure Grafana Service",
+        "USD"
+      ],
+      [
+        0.396639784946237,
+        "Azure Monitor",
+        "USD"
+      ],
+      [
+        0.0001896,
+        "Bandwidth",
+        "USD"
+      ],
+      [
+        33.0299194616024,
+        "Container Instances",
+        "USD"
+      ],
+      [
+        5.7281381852,
+        "Container Registry",
+        "USD"
+      ],
+      [
+        0.000447,
+        "Event Grid",
+        "USD"
+      ],
+      [
+        0.176887181,
+        "Foundry Models",
+        "USD"
+      ],
+      [
+        0.07,
+        "Foundry Tools",
+        "USD"
+      ],
+      [
+        36.9,
+        "Load Balancer",
+        "USD"
+      ],
+      [
+        0.241848819656129,
+        "Log Analytics",
+        "USD"
+      ],
+      [
+        0.198822470328197,
+        "Logic Apps",
+        "USD"
+      ],
+      [
+        123.433913505904,
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.102762149024,
+        "Storage",
+        "USD"
+      ],
+      [
+        7.38,
+        "Virtual Network",
+        "USD"
+      ]
+    ]
+  },
+  "sku": null,
+  "type": "Microsoft.CostManagement/query"
+}

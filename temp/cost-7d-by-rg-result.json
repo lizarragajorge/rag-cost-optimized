@@ -1,0 +1,102 @@
+{
+  "eTag": null,
+  "id": "subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/providers/Microsoft.CostManagement/query/5e0be773-a019-40ac-8b3d-ea5222a6f329",
+  "location": null,
+  "name": "5e0be773-a019-40ac-8b3d-ea5222a6f329",
+  "properties": {
+    "columns": [
+      {
+        "name": "Cost",
+        "type": "Number"
+      },
+      {
+        "name": "ResourceGroupName",
+        "type": "String"
+      },
+      {
+        "name": "Currency",
+        "type": "String"
+      }
+    ],
+    "nextLink": null,
+    "rows": [
+      [
+        3.295,
+        "",
+        "USD"
+      ],
+      [
+        8.21757412926667,
+        "agenticodyssey-rg",
+        "USD"
+      ],
+      [
+        65.464022,
+        "ai-foundry-demo",
+        "USD"
+      ],
+      [
+        12.6247584300956,
+        "eastus-2-video-indexxer",
+        "USD"
+      ],
+      [
+        3.7138988,
+        "machine-learning-studio",
+        "USD"
+      ],
+      [
+        5.58,
+        "mc_eastus-2-video-indexxer_clustereastus2_eastus2",
+        "USD"
+      ],
+      [
+        5.58,
+        "mc_eastus-2-video-indexxer_video-indexer-demo_eastus2",
+        "USD"
+      ],
+      [
+        4.1887616608,
+        "mcapsgovernance",
+        "USD"
+      ],
+      [
+        4.3401405,
+        "rag-demo",
+        "USD"
+      ],
+      [
+        20.6040526924178,
+        "rg-ai-cost-demo",
+        "USD"
+      ],
+      [
+        147.7779235792,
+        "rg-contoso-foundry-hub-dev",
+        "USD"
+      ],
+      [
+        0.0524764758735484,
+        "rg-contoso-foundry-monitoring-dev",
+        "USD"
+      ],
+      [
+        70.6694747282865,
+        "rg-email-rag-eastus",
+        "USD"
+      ],
+      [
+        28.88199280072,
+        "rg-rag-after-build",
+        "USD"
+      ],
+      [
+        2.223641872,
+        "rg-ragcost-ragcost-demo",
+        "USD"
+      ]
+    ]
+  },
+  "sku": null,
+  "type": "Microsoft.CostManagement/query"
+}

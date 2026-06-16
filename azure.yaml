@@ -1,0 +1,26 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-dev/main/schemas/v1.0/azure.yaml.json
+
+name: rag-cost-optimized
+metadata:
+  template: rag-cost-optimized@1.0.0
+
+infra:
+  provider: bicep
+  path: infra
+  module: main
+
+# No `services` block on purpose — this app runs locally and only uses Azure
+# resources as back-ends. `azd provision` is the only command you need.
+
+hooks:
+  postprovision:
+    posix:
+      shell: sh
+      run: infra/hooks/postprovision.sh
+      continueOnError: false
+      interactive: false
+    windows:
+      shell: pwsh
+      run: infra/hooks/postprovision.ps1
+      continueOnError: false
+      interactive: false

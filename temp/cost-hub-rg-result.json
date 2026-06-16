@@ -1,0 +1,103 @@
+{
+  "eTag": null,
+  "id": "subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/Microsoft.CostManagement/query/12c6dc09-84b8-4d5f-a320-45db6863ea3e",
+  "location": null,
+  "name": "12c6dc09-84b8-4d5f-a320-45db6863ea3e",
+  "properties": {
+    "columns": [
+      {
+        "name": "Cost",
+        "type": "Number"
+      },
+      {
+        "name": "ResourceId",
+        "type": "String"
+      },
+      {
+        "name": "MeterCategory",
+        "type": "String"
+      },
+      {
+        "name": "Currency",
+        "type": "String"
+      }
+    ],
+    "nextLink": null,
+    "rows": [
+      [
+        155.34288,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.apimanagement/service/contoso-foundry-apim-dev",
+        "API Management",
+        "USD"
+      ],
+      [
+        155.34288,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.apimanagement/service/contoso-foundry-gateway-dev",
+        "API Management",
+        "USD"
+      ],
+      [
+        5e-05,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.keyvault/vaults/kv-contoso-foundry-dev",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        55.44,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.search/searchservices/contoso-operations-dev-srch",
+        "Azure Cognitive Search",
+        "USD"
+      ],
+      [
+        9.61e-05,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.storage/storageaccounts/rgcontosofoundryhub817d",
+        "Bandwidth",
+        "USD"
+      ],
+      [
+        15.3286846934039,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.storage/storageaccounts/rgcontosofoundryhub817d",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.001683847552,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.storage/storageaccounts/rgcontosofoundryhub817d",
+        "Storage",
+        "USD"
+      ],
+      [
+        1.98e-05,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.storage/storageaccounts/rgcontosofoundryhub817d/providers/microsoft.eventgrid/extensiontopics/default",
+        "Event Grid",
+        "USD"
+      ],
+      [
+        15.3286,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.storage/storageaccounts/stcontosofuncdev",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        4.6e-05,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.storage/storageaccounts/stcontosofuncdev",
+        "Storage",
+        "USD"
+      ],
+      [
+        0.0,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.web/sites/foundry-hub-external-model",
+        "Azure App Service",
+        "USD"
+      ],
+      [
+        0.6615,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.web/sites/foundry-hub-external-model",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ]
+    ]
+  },
+  "sku": null,
+  "type": "Microsoft.CostManagement/query"
+}

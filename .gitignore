@@ -1,0 +1,24 @@
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+env/
+.env
+*.db
+backend/data/cache.db
+backend/data/index.db
+backend/data/working_corpus/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.vscode/
+.idea/
+node_modules/
+dist/
+build/
+.DS_Store
+
+# azd local state (env vars, principal id, etc.)
+.azure/*/
+!.azure/deployment-plan.md

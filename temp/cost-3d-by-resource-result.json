@@ -1,0 +1,439 @@
+{
+  "eTag": null,
+  "id": "subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/providers/Microsoft.CostManagement/query/fc3a1f20-e46a-47d0-ae5e-d4681b346849",
+  "location": null,
+  "name": "fc3a1f20-e46a-47d0-ae5e-d4681b346849",
+  "properties": {
+    "columns": [
+      {
+        "name": "Cost",
+        "type": "Number"
+      },
+      {
+        "name": "ResourceId",
+        "type": "String"
+      },
+      {
+        "name": "MeterCategory",
+        "type": "String"
+      },
+      {
+        "name": "Currency",
+        "type": "String"
+      }
+    ],
+    "nextLink": null,
+    "rows": [
+      [
+        0.0657,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/providers/microsoft.security/pricings/arm",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.29,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/providers/microsoft.security/pricings/containers/images/sha256:31f51984c1496806b23890e23af7b73f1a94747bcc7bfedc8f8bcdcb1ffe0a04",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.29,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/providers/microsoft.security/pricings/containers/images/sha256:36a80fa5f11486f20e876012acd2f20c6eef33453e73bece56ff5974ee60a041",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.29,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/providers/microsoft.security/pricings/containers/images/sha256:3fad06c2947699881bb21c3b8196e6942377cfd898775a331e944b38bbea175a",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.29,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/providers/microsoft.security/pricings/containers/images/sha256:400e48e300b72fc0c65938d89be84af368576be4012f1e34b99b3ae5b08f0f0a",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.29,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/providers/microsoft.security/pricings/containers/images/sha256:56e36f21adc3155748f5ef20efef46be3e70d9abc5528482249dd37f02534c3b",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.29,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/providers/microsoft.security/pricings/containers/images/sha256:648bd7a7d05e80983a448724ae545540c09f2b1532b9fec4700f109754042b3f",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.29,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/providers/microsoft.security/pricings/containers/images/sha256:9718eff72101fb9d76e9a6fd144f573550c7ebca99817f1b4a57a7cc09046bef",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.29,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/providers/microsoft.security/pricings/containers/images/sha256:999be5d5145668a03c5428f2270ab44db3a83575a6bf4d61d01d58dc484bb931",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.29,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/providers/microsoft.security/pricings/containers/images/sha256:a73aff756a6968c4258a44d0690969ad1cd78dbf1f1a286df6350c7f960ae7a9",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.29,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/providers/microsoft.security/pricings/containers/images/sha256:b0a14d6a5a994107e5a96f637ebf18e9d3831743c73432515705f5973dae41f8",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.29,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/providers/microsoft.security/pricings/containers/images/sha256:cdba42e3cabbf1b75bdc6a3c641a52956fb776ad6780c9eeeef9ae2877a703b2",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        3.90235093050674,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/agenticodyssey-rg/providers/microsoft.containerinstance/containergroups/mcp-serverjl",
+        "Container Instances",
+        "USD"
+      ],
+      [
+        0.0,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/agenticodyssey-rg/providers/microsoft.search/searchservices/agenticodyssey-search-22102",
+        "Azure Cognitive Search",
+        "USD"
+      ],
+      [
+        1.4e-05,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/ai-foundry-demo/providers/microsoft.keyvault/vaults/jl-ai-foundry-kv",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        29.568,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/ai-foundry-demo/providers/microsoft.search/searchservices/search-service-demo-jl",
+        "Azure Cognitive Search",
+        "USD"
+      ],
+      [
+        1.72,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/ai-foundry-demo/providers/microsoft.web/serverfarms/jl-ai-foundry-demo",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        5.94952489409556,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/eastus-2-video-indexxer/providers/microsoft.dashboard/grafana/grafana-20260326102813",
+        "Azure Grafana Service",
+        "USD"
+      ],
+      [
+        0.0120967741935484,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/eastus-2-video-indexxer/providers/microsoft.insights/metricalerts/cpu usage percentage - clustereastus2",
+        "Azure Monitor",
+        "USD"
+      ],
+      [
+        0.0120967741935484,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/eastus-2-video-indexxer/providers/microsoft.insights/metricalerts/cpu usage percentage - video-indexer-demo",
+        "Azure Monitor",
+        "USD"
+      ],
+      [
+        0.0120967741935484,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/eastus-2-video-indexxer/providers/microsoft.insights/metricalerts/memory working set percentage - clustereastus2",
+        "Azure Monitor",
+        "USD"
+      ],
+      [
+        0.0120967741935484,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/eastus-2-video-indexxer/providers/microsoft.insights/metricalerts/memory working set percentage - video-indexer-demo",
+        "Azure Monitor",
+        "USD"
+      ],
+      [
+        0.0,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/eastus-2-video-indexxer/providers/microsoft.storage/storageaccounts/jlstorageaccountvideoind",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        4.6e-05,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/machine-learning-studio/providers/microsoft.keyvault/vaults/machinelearnin0978804888",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        1.7544,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/machine-learning-studio/providers/microsoft.storage/storageaccounts/machinelearnin5646375115",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        9e-05,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/machine-learning-studio/providers/microsoft.storage/storageaccounts/machinelearnin5646375115",
+        "Storage",
+        "USD"
+      ],
+      [
+        7.2e-06,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/machine-learning-studio/providers/microsoft.storage/storageaccounts/machinelearnin5646375115/providers/microsoft.eventgrid/extensiontopics/default",
+        "Event Grid",
+        "USD"
+      ],
+      [
+        2.25,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/mc_eastus-2-video-indexxer_clustereastus2_eastus2/providers/microsoft.network/loadbalancers/kubernetes",
+        "Load Balancer",
+        "USD"
+      ],
+      [
+        0.45,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/mc_eastus-2-video-indexxer_clustereastus2_eastus2/providers/microsoft.network/publicipaddresses/f6e0d81f-06de-4a24-8675-81b62ca96ed8",
+        "Virtual Network",
+        "USD"
+      ],
+      [
+        2.25,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/mc_eastus-2-video-indexxer_video-indexer-demo_eastus2/providers/microsoft.network/loadbalancers/kubernetes",
+        "Load Balancer",
+        "USD"
+      ],
+      [
+        0.45,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/mc_eastus-2-video-indexxer_video-indexer-demo_eastus2/providers/microsoft.network/publicipaddresses/32d3462f-842a-43c4-9f2a-e3c2451ad821",
+        "Virtual Network",
+        "USD"
+      ],
+      [
+        1.586e-05,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/mcapsgovernance/providers/microsoft.storage/storageaccounts/mcapsb42f43da13f7fde4",
+        "Bandwidth",
+        "USD"
+      ],
+      [
+        2.2032,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/mcapsgovernance/providers/microsoft.storage/storageaccounts/mcapsb42f43da13f7fde4",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.017705004,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/mcapsgovernance/providers/microsoft.storage/storageaccounts/mcapsb42f43da13f7fde4",
+        "Storage",
+        "USD"
+      ],
+      [
+        2.64e-05,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/mcapsgovernance/providers/microsoft.storage/storageaccounts/mcapsb42f43da13f7fde4/providers/microsoft.eventgrid/extensiontopics/default",
+        "Event Grid",
+        "USD"
+      ],
+      [
+        2.2032,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rag-demo/providers/microsoft.storage/storageaccounts/ragdemo87df",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        2e-06,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rag-demo/providers/microsoft.storage/storageaccounts/ragdemo87df",
+        "Storage",
+        "USD"
+      ],
+      [
+        0.0,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rag-demo/providers/microsoft.web/sites/demo-router",
+        "Azure App Service",
+        "USD"
+      ],
+      [
+        0.0945,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rag-demo/providers/microsoft.web/sites/demo-router",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        10.908,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-ai-cost-demo/providers/microsoft.search/searchservices/srch-ai-cost-demo-qrbcly44owcyo",
+        "Azure Cognitive Search",
+        "USD"
+      ],
+      [
+        22.19184,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.apimanagement/service/contoso-foundry-apim-dev",
+        "API Management",
+        "USD"
+      ],
+      [
+        22.19184,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.apimanagement/service/contoso-foundry-gateway-dev",
+        "API Management",
+        "USD"
+      ],
+      [
+        6e-06,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.keyvault/vaults/kv-contoso-foundry-dev",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        36.288,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.search/searchservices/contoso-operations-dev-srch",
+        "Azure Cognitive Search",
+        "USD"
+      ],
+      [
+        2.2032,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.storage/storageaccounts/rgcontosofoundryhub817d",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.0002441184,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.storage/storageaccounts/rgcontosofoundryhub817d",
+        "Storage",
+        "USD"
+      ],
+      [
+        2.2032,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.storage/storageaccounts/stcontosofuncdev",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        1e-05,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.storage/storageaccounts/stcontosofuncdev",
+        "Storage",
+        "USD"
+      ],
+      [
+        0.0,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.web/sites/foundry-hub-external-model",
+        "Azure App Service",
+        "USD"
+      ],
+      [
+        0.0945,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-hub-dev/providers/microsoft.web/sites/foundry-hub-external-model",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.0274699024451613,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-contoso-foundry-monitoring-dev/providers/microsoft.operationalinsights/workspaces/contoso-foundry-law",
+        "Log Analytics",
+        "USD"
+      ],
+      [
+        0.002279288,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-email-rag-eastus/providers/microsoft.cognitiveservices/accounts/oai-emailrag-me3vszgpm53lu",
+        "Foundry Models",
+        "USD"
+      ],
+      [
+        0.0003584,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-email-rag-eastus/providers/microsoft.cognitiveservices/accounts/oai-emailrag-me3vszgpm53lu",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.6039806444,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-email-rag-eastus/providers/microsoft.containerregistry/registries/acremailragef9da96e",
+        "Container Registry",
+        "USD"
+      ],
+      [
+        1.4e-05,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-email-rag-eastus/providers/microsoft.keyvault/vaults/kv-emailrag-me3vszgpm53l",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.0254652259260407,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-email-rag-eastus/providers/microsoft.logic/workflows/logic-emailrag-ingest",
+        "Logic Apps",
+        "USD"
+      ],
+      [
+        0.00613707917419355,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-email-rag-eastus/providers/microsoft.operationalinsights/workspaces/log-emailrag-me3vszgpm53lu",
+        "Log Analytics",
+        "USD"
+      ],
+      [
+        29.568,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-email-rag-eastus/providers/microsoft.search/searchservices/srch-emailrag-me3vszgpm53lu",
+        "Azure Cognitive Search",
+        "USD"
+      ],
+      [
+        1.7952,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-email-rag-eastus/providers/microsoft.storage/storageaccounts/stemailragme3vszgpm53lu",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.0004752,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-email-rag-eastus/providers/microsoft.storage/storageaccounts/stemailragme3vszgpm53lu",
+        "Storage",
+        "USD"
+      ],
+      [
+        1.7952,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-email-rag-eastus/providers/microsoft.storage/storageaccounts/stfuncemailragme3vszgpm5",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.018231121,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-rag-after-build/providers/microsoft.cognitiveservices/accounts/oai-ragbuild-z4hv537rpjr7m",
+        "Foundry Models",
+        "USD"
+      ],
+      [
+        0.0108696,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-rag-after-build/providers/microsoft.cognitiveservices/accounts/oai-ragbuild-z4hv537rpjr7m",
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.6259215552,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-rag-after-build/providers/microsoft.containerregistry/registries/acrragbuildz4hv537rpjr7m",
+        "Container Registry",
+        "USD"
+      ],
+      [
+        0.00297052452,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-rag-after-build/providers/microsoft.operationalinsights/workspaces/log-ragbuild-z4hv537rpjr7m",
+        "Log Analytics",
+        "USD"
+      ],
+      [
+        28.224,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-rag-after-build/providers/microsoft.search/searchservices/srch-ragbuild-z4hv537rpjr7m",
+        "Azure Cognitive Search",
+        "USD"
+      ],
+      [
+        0.001641872,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-ragcost-ragcost-demo/providers/microsoft.cognitiveservices/accounts/ragcost-aif-67djz3lsexova",
+        "Foundry Models",
+        "USD"
+      ],
+      [
+        2.222,
+        "/subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/resourcegroups/rg-ragcost-ragcost-demo/providers/microsoft.search/searchservices/ragcost-search-67djz3lsexova",
+        "Azure Cognitive Search",
+        "USD"
+      ]
+    ]
+  },
+  "sku": null,
+  "type": "Microsoft.CostManagement/query"
+}

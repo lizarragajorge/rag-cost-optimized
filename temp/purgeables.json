@@ -1,0 +1,37 @@
+{
+  "count": 5,
+  "data": [
+    {
+      "location": "eastus2",
+      "name": "contoso-foundry-apim-dev",
+      "resourceGroup": "rg-contoso-foundry-hub-dev",
+      "type": "microsoft.apimanagement/service"
+    },
+    {
+      "location": "eastus2",
+      "name": "contoso-foundry-gateway-dev",
+      "resourceGroup": "rg-contoso-foundry-hub-dev",
+      "type": "microsoft.apimanagement/service"
+    },
+    {
+      "location": "eastus2",
+      "name": "contoso-foundry-hub-dev",
+      "resourceGroup": "rg-contoso-foundry-hub-dev",
+      "type": "microsoft.cognitiveservices/accounts"
+    },
+    {
+      "location": "westus3",
+      "name": "contoso-foundry-hub-west-dev",
+      "resourceGroup": "rg-contoso-foundry-hub-dev",
+      "type": "microsoft.cognitiveservices/accounts"
+    },
+    {
+      "location": "eastus2",
+      "name": "kv-contoso-foundry-dev",
+      "resourceGroup": "rg-contoso-foundry-hub-dev",
+      "type": "microsoft.keyvault/vaults"
+    }
+  ],
+  "skip_token": null,
+  "total_records": 5
+}

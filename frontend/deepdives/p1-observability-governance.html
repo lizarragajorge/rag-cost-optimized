@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>P1 Deep Dive - Observability and governance</title>
+  <link rel="stylesheet" href="/static/deepdives/deepdive.css" />
+</head>
+<body>
+  <header class="top">
+    <div class="top-inner">
+      <div class="brand">Priority Deep Dive</div>
+      <nav class="nav">
+        <a href="/static/playbook.html">Back to Playbook</a>
+        <a href="/">Live Demo</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <p class="eyebrow">P1</p>
+      <h1>Observability and governance</h1>
+      <p class="lede">Build run-level transparency so cost and reliability decisions are data-driven, not guesswork.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Current vs Recommended</h2>
+      <div class="grid-3">
+        <article class="card current">
+          <h3>What they are doing now</h3>
+          <p>Costs are visible in aggregate billing, but run-level causality (which source/indexer caused spend) is limited.</p>
+        </article>
+        <article class="card recommended">
+          <h3>More cost-effective way</h3>
+          <p>Require telemetry per refresh run and per source profile, then alert on abnormal token or failure spikes.</p>
+        </article>
+        <article class="card why">
+          <h3>Why this works</h3>
+          <p>Governance requires attribution. Without per-run metrics, teams cannot optimize or enforce cost SLOs.</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>Recommended run payload</h2>
+      <div class="grid-3">
+        <article class="card">
+          <h3>Response schema</h3>
+          <pre><code>{
+  "runId": "...",
+  "documentsSeen": 0,
+  "documentsSkipped": 0,
+  "chunksEmbedded": 0,
+  "tokensEmbedded": 0,
+  "costUsd": 0.0,
+  "durationMs": 0,
+  "failedItems": 0
+}</code></pre>
+        </article>
+        <article class="card">
+          <h3>Alert thresholds</h3>
+          <pre><code>- tokensEmbedded > 2x weekly median
+- failedItems > 0
+- durationMs > SLA threshold
+- rerun count > daily limit</code></pre>
+        </article>
+        <article class="card">
+          <h3>Ownership</h3>
+          <pre><code>- Product owner: quality gate
+- Platform owner: run reliability
+- FinOps owner: spend trends</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <h2>How to implement</h2>
+      <ol class="steps">
+        <li>Instrument refresh endpoint and indexer orchestration with structured logs.</li>
+        <li>Push metrics to App Insights / Log Analytics and build dashboard by source.</li>
+        <li>Define weekly review cadence for cost anomalies.</li>
+        <li>Set policy gates for full rebuild execution and exception recording.</li>
+      </ol>
+      <p class="note">Tip: publish a one-page weekly scorecard to keep teams aligned on reliability + cost goals.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Expected impact</h2>
+      <div class="impact">
+        <article class="kpi"><div class="label">Cost control maturity</div><div class="value">High</div></article>
+        <article class="kpi"><div class="label">Reliability visibility</div><div class="value">High</div></article>
+        <article class="kpi"><div class="label">Time to value</div><div class="value">1-2 weeks</div></article>
+      </div>
+    </section>
+
+    <section class="panel">
+      <button class="copy-link">Copy page link</button>
+    </section>
+  </main>
+
+  <script src="/static/deepdives/deepdive.js"></script>
+</body>
+</html>

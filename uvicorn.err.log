@@ -1,0 +1,240 @@
+INFO:     Started server process [80564]
+INFO:     Waiting for application startup.
+2026-06-09 17:15:43,222 INFO root: Backend: azure-openai
+2026-06-09 17:15:43,223 INFO root: AI Search enabled: True
+2026-06-09 17:15:43,224 INFO root: Foundry agent enabled: True
+INFO:     Application startup complete.
+INFO:     Uvicorn running on http://127.0.0.1:8000 (Press CTRL+C to quit)
+2026-06-09 17:15:45,395 INFO azure.identity._credentials.environment: No environment configuration found.
+2026-06-09 17:15:45,404 INFO azure.identity._credentials.managed_identity: ManagedIdentityCredential will use IMDS
+2026-06-09 17:15:45,410 INFO azure.core.pipeline.policies.http_logging_policy: Request URL: 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=REDACTED'
+Request method: 'GET'
+Request headers:
+    'User-Agent': 'azsdk-python-identity/1.19.0 Python/3.11.9 (Windows-10-10.0.26200-SP0)'
+No body was attached to the request
+2026-06-09 17:15:49,399 INFO azure.identity._credentials.chained: DefaultAzureCredential acquired a token from AzureCliCredential
+2026-06-09 17:15:50,747 INFO httpx: HTTP Request: POST https://ragcost-aif-67djz3lsexova.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2026-06-09 17:15:52,195 INFO httpx: HTTP Request: POST https://ragcost-aif-67djz3lsexova.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2026-06-09 17:15:53,610 INFO httpx: HTTP Request: POST https://ragcost-aif-67djz3lsexova.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2026-06-09 17:15:55,113 INFO httpx: HTTP Request: POST https://ragcost-aif-67djz3lsexova.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2026-06-09 17:15:56,711 INFO httpx: HTTP Request: POST https://ragcost-aif-67djz3lsexova.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2026-06-09 17:16:00,340 INFO azure.identity._internal.decorators: AzureCliCredential.get_token succeeded
+2026-06-09 17:16:00,341 INFO azure.identity._credentials.default: DefaultAzureCredential acquired a token from AzureCliCredential
+2026-06-09 17:16:00,652 INFO httpx: HTTP Request: GET https://ragcost-search-67djz3lsexova.search.windows.net/indexes/rag-cost-demo?api-version=2024-07-01 "HTTP/1.1 200 OK"
+2026-06-09 17:16:02,234 INFO httpx: HTTP Request: POST https://ragcost-search-67djz3lsexova.search.windows.net/indexes/rag-cost-demo/docs/index?api-version=2024-07-01 "HTTP/1.1 200 OK"
+2026-06-09 17:16:12,647 INFO httpx: HTTP Request: POST https://ragcost-aif-67djz3lsexova.openai.azure.com/openai/deployments/text-embedding-3-small/embeddings?api-version=2024-10-21 "HTTP/1.1 200 OK"
+2026-06-09 17:16:12,911 INFO azure.identity._credentials.environment: No environment configuration found.
+2026-06-09 17:16:12,911 INFO azure.identity._credentials.managed_identity: ManagedIdentityCredential will use IMDS
+2026-06-09 17:16:12,915 INFO azure.core.pipeline.policies.http_logging_policy: Request URL: 'http://169.254.169.254/metadata/identity/oauth2/token?api-version=2018-02-01&resource=REDACTED'
+Request method: 'GET'
+Request headers:
+    'User-Agent': 'azsdk-python-identity/1.19.0 Python/3.11.9 (Windows-10-10.0.26200-SP0)'
+No body was attached to the request
+2026-06-09 17:16:14,981 INFO azure.identity._credentials.chained: DefaultAzureCredential acquired a token from AzureCliCredential
+2026-06-09 17:16:14,983 INFO azure.core.pipeline.policies.http_logging_policy: Request URL: 'https://ragcost-aif-67djz3lsexova.services.ai.azure.com/api/projects/rag-cost-project/threads?api-version=v1'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/json'
+    'Content-Length': '2'
+    'Accept': 'application/json'
+    'x-ms-client-request-id': 'd339c589-6450-11f1-a0d0-046874e9d1c4'
+    'User-Agent': 'AIProjectClient azsdk-python-ai-agents/1.1.0 Python/3.11.9 (Windows-10-10.0.26200-SP0)'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2026-06-09 17:16:16,206 INFO azure.core.pipeline.policies.http_logging_policy: Response status: 200
+Response headers:
+    'Content-Length': '137'
+    'Content-Type': 'application/json'
+    'Request-Context': 'REDACTED'
+    'x-ms-response-type': 'REDACTED'
+    'x-ms-middleware-request-id': 'REDACTED'
+    'openai-version': 'REDACTED'
+    'openai-organization': 'REDACTED'
+    'X-Request-ID': 'REDACTED'
+    'openai-processing-ms': 'REDACTED'
+    'Strict-Transport-Security': 'REDACTED'
+    'apim-request-id': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-region': 'REDACTED'
+    'azureml-served-by-cluster': 'REDACTED'
+    'x-request-time': 'REDACTED'
+    'Access-Control-Expose-Headers': 'REDACTED'
+    'Date': 'Tue, 09 Jun 2026 22:16:13 GMT'
+2026-06-09 17:16:16,213 INFO azure.core.pipeline.policies.http_logging_policy: Request URL: 'https://ragcost-aif-67djz3lsexova.services.ai.azure.com/api/projects/rag-cost-project/threads/thread_EhxNNC7eO2uOE968mHHQas5e/messages?api-version=v1'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/json'
+    'Content-Length': '57'
+    'Accept': 'application/json'
+    'x-ms-client-request-id': 'd5314481-6450-11f1-90d7-046874e9d1c4'
+    'User-Agent': 'AIProjectClient azsdk-python-ai-agents/1.1.0 Python/3.11.9 (Windows-10-10.0.26200-SP0)'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2026-06-09 17:16:16,572 INFO azure.core.pipeline.policies.http_logging_policy: Response status: 200
+Response headers:
+    'Transfer-Encoding': 'chunked'
+    'Content-Type': 'application/json'
+    'Content-Encoding': 'REDACTED'
+    'Vary': 'REDACTED'
+    'Request-Context': 'REDACTED'
+    'x-ms-response-type': 'REDACTED'
+    'x-ms-middleware-request-id': 'REDACTED'
+    'openai-version': 'REDACTED'
+    'openai-organization': 'REDACTED'
+    'X-Request-ID': 'REDACTED'
+    'openai-processing-ms': 'REDACTED'
+    'Strict-Transport-Security': 'REDACTED'
+    'apim-request-id': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-region': 'REDACTED'
+    'azureml-served-by-cluster': 'REDACTED'
+    'x-request-time': 'REDACTED'
+    'Access-Control-Expose-Headers': 'REDACTED'
+    'Date': 'Tue, 09 Jun 2026 22:16:14 GMT'
+2026-06-09 17:16:16,577 INFO azure.core.pipeline.policies.http_logging_policy: Request URL: 'https://ragcost-aif-67djz3lsexova.services.ai.azure.com/api/projects/rag-cost-project/threads/thread_EhxNNC7eO2uOE968mHHQas5e/runs?api-version=v1'
+Request method: 'POST'
+Request headers:
+    'Content-Type': 'application/json'
+    'Content-Length': '66'
+    'Accept': 'application/json'
+    'x-ms-client-request-id': 'd568cae2-6450-11f1-806c-046874e9d1c4'
+    'User-Agent': 'AIProjectClient azsdk-python-ai-agents/1.1.0 Python/3.11.9 (Windows-10-10.0.26200-SP0)'
+    'Authorization': 'REDACTED'
+A body is sent with the request
+2026-06-09 17:16:17,299 INFO azure.core.pipeline.policies.http_logging_policy: Response status: 200
+Response headers:
+    'Transfer-Encoding': 'chunked'
+    'Content-Type': 'application/json'
+    'Content-Encoding': 'REDACTED'
+    'Vary': 'REDACTED'
+    'Request-Context': 'REDACTED'
+    'x-ms-response-type': 'REDACTED'
+    'x-ms-middleware-request-id': 'REDACTED'
+    'openai-version': 'REDACTED'
+    'openai-organization': 'REDACTED'
+    'X-Request-ID': 'REDACTED'
+    'openai-processing-ms': 'REDACTED'
+    'Strict-Transport-Security': 'REDACTED'
+    'apim-request-id': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-region': 'REDACTED'
+    'azureml-served-by-cluster': 'REDACTED'
+    'x-request-time': 'REDACTED'
+    'Access-Control-Expose-Headers': 'REDACTED'
+    'Date': 'Tue, 09 Jun 2026 22:16:14 GMT'
+2026-06-09 17:16:18,307 INFO azure.core.pipeline.policies.http_logging_policy: Request URL: 'https://ragcost-aif-67djz3lsexova.services.ai.azure.com/api/projects/rag-cost-project/threads/thread_EhxNNC7eO2uOE968mHHQas5e/runs/run_t5hVply7eK5X4a6ax8OvT5QH?api-version=v1'
+Request method: 'GET'
+Request headers:
+    'Accept': 'application/json'
+    'x-ms-client-request-id': 'd670b778-6450-11f1-a32c-046874e9d1c4'
+    'User-Agent': 'AIProjectClient azsdk-python-ai-agents/1.1.0 Python/3.11.9 (Windows-10-10.0.26200-SP0)'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2026-06-09 17:16:18,738 INFO azure.core.pipeline.policies.http_logging_policy: Response status: 200
+Response headers:
+    'Transfer-Encoding': 'chunked'
+    'Content-Type': 'application/json'
+    'Content-Encoding': 'REDACTED'
+    'Vary': 'REDACTED'
+    'Request-Context': 'REDACTED'
+    'x-ms-response-type': 'REDACTED'
+    'x-ms-middleware-request-id': 'REDACTED'
+    'openai-version': 'REDACTED'
+    'openai-organization': 'REDACTED'
+    'X-Request-ID': 'REDACTED'
+    'openai-processing-ms': 'REDACTED'
+    'Strict-Transport-Security': 'REDACTED'
+    'apim-request-id': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-region': 'REDACTED'
+    'azureml-served-by-cluster': 'REDACTED'
+    'x-request-time': 'REDACTED'
+    'Access-Control-Expose-Headers': 'REDACTED'
+    'Date': 'Tue, 09 Jun 2026 22:16:16 GMT'
+2026-06-09 17:16:19,741 INFO azure.core.pipeline.policies.http_logging_policy: Request URL: 'https://ragcost-aif-67djz3lsexova.services.ai.azure.com/api/projects/rag-cost-project/threads/thread_EhxNNC7eO2uOE968mHHQas5e/runs/run_t5hVply7eK5X4a6ax8OvT5QH?api-version=v1'
+Request method: 'GET'
+Request headers:
+    'Accept': 'application/json'
+    'x-ms-client-request-id': 'd74b9fee-6450-11f1-85d6-046874e9d1c4'
+    'User-Agent': 'AIProjectClient azsdk-python-ai-agents/1.1.0 Python/3.11.9 (Windows-10-10.0.26200-SP0)'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2026-06-09 17:16:20,057 INFO azure.core.pipeline.policies.http_logging_policy: Response status: 200
+Response headers:
+    'Transfer-Encoding': 'chunked'
+    'Content-Type': 'application/json'
+    'Content-Encoding': 'REDACTED'
+    'Vary': 'REDACTED'
+    'Request-Context': 'REDACTED'
+    'x-ms-response-type': 'REDACTED'
+    'x-ms-middleware-request-id': 'REDACTED'
+    'openai-version': 'REDACTED'
+    'openai-organization': 'REDACTED'
+    'X-Request-ID': 'REDACTED'
+    'openai-processing-ms': 'REDACTED'
+    'Strict-Transport-Security': 'REDACTED'
+    'apim-request-id': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-region': 'REDACTED'
+    'azureml-served-by-cluster': 'REDACTED'
+    'x-request-time': 'REDACTED'
+    'Access-Control-Expose-Headers': 'REDACTED'
+    'Date': 'Tue, 09 Jun 2026 22:16:17 GMT'
+2026-06-09 17:16:21,060 INFO azure.core.pipeline.policies.http_logging_policy: Request URL: 'https://ragcost-aif-67djz3lsexova.services.ai.azure.com/api/projects/rag-cost-project/threads/thread_EhxNNC7eO2uOE968mHHQas5e/runs/run_t5hVply7eK5X4a6ax8OvT5QH?api-version=v1'
+Request method: 'GET'
+Request headers:
+    'Accept': 'application/json'
+    'x-ms-client-request-id': 'd814d044-6450-11f1-855e-046874e9d1c4'
+    'User-Agent': 'AIProjectClient azsdk-python-ai-agents/1.1.0 Python/3.11.9 (Windows-10-10.0.26200-SP0)'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2026-06-09 17:16:21,499 INFO azure.core.pipeline.policies.http_logging_policy: Response status: 200
+Response headers:
+    'Transfer-Encoding': 'chunked'
+    'Content-Type': 'application/json'
+    'Content-Encoding': 'REDACTED'
+    'Vary': 'REDACTED'
+    'Request-Context': 'REDACTED'
+    'x-ms-response-type': 'REDACTED'
+    'x-ms-middleware-request-id': 'REDACTED'
+    'openai-version': 'REDACTED'
+    'openai-organization': 'REDACTED'
+    'X-Request-ID': 'REDACTED'
+    'openai-processing-ms': 'REDACTED'
+    'Strict-Transport-Security': 'REDACTED'
+    'apim-request-id': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-region': 'REDACTED'
+    'azureml-served-by-cluster': 'REDACTED'
+    'x-request-time': 'REDACTED'
+    'Access-Control-Expose-Headers': 'REDACTED'
+    'Date': 'Tue, 09 Jun 2026 22:16:19 GMT'
+2026-06-09 17:16:21,504 INFO azure.core.pipeline.policies.http_logging_policy: Request URL: 'https://ragcost-aif-67djz3lsexova.services.ai.azure.com/api/projects/rag-cost-project/threads/thread_EhxNNC7eO2uOE968mHHQas5e/messages?api-version=v1&order=REDACTED'
+Request method: 'GET'
+Request headers:
+    'Accept': 'application/json'
+    'x-ms-client-request-id': 'd8588b86-6450-11f1-b021-046874e9d1c4'
+    'User-Agent': 'AIProjectClient azsdk-python-ai-agents/1.1.0 Python/3.11.9 (Windows-10-10.0.26200-SP0)'
+    'Authorization': 'REDACTED'
+No body was attached to the request
+2026-06-09 17:16:21,948 INFO azure.core.pipeline.policies.http_logging_policy: Response status: 200
+Response headers:
+    'Transfer-Encoding': 'chunked'
+    'Content-Type': 'application/json'
+    'Content-Encoding': 'REDACTED'
+    'Vary': 'REDACTED'
+    'Request-Context': 'REDACTED'
+    'x-ms-response-type': 'REDACTED'
+    'x-ms-middleware-request-id': 'REDACTED'
+    'openai-version': 'REDACTED'
+    'openai-organization': 'REDACTED'
+    'X-Request-ID': 'REDACTED'
+    'openai-processing-ms': 'REDACTED'
+    'Strict-Transport-Security': 'REDACTED'
+    'apim-request-id': 'REDACTED'
+    'X-Content-Type-Options': 'REDACTED'
+    'x-ms-region': 'REDACTED'
+    'azureml-served-by-cluster': 'REDACTED'
+    'x-request-time': 'REDACTED'
+    'Access-Control-Expose-Headers': 'REDACTED'
+    'Date': 'Tue, 09 Jun 2026 22:16:19 GMT'

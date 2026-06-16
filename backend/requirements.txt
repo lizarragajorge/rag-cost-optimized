@@ -1,0 +1,16 @@
+fastapi==0.115.6
+uvicorn[standard]==0.32.1
+pydantic==2.10.4
+pydantic-settings==2.7.0
+tiktoken==0.8.0
+numpy==2.2.0
+httpx==0.28.1
+python-multipart==0.0.20
+
+# --- Optional: real Foundry agent integration ---------------------------------
+# Only required when FOUNDRY_PROJECT_ENDPOINT + FOUNDRY_AGENT_ID are set.
+# The module gracefully no-ops when these libraries cannot be imported, so the
+# offline simulated demo still runs without them.
+azure-identity==1.19.0
+azure-ai-projects==1.0.0
+azure-ai-agents==1.1.0

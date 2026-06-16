@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RAG Cost-Optimized — Foundry Demo</title>
+  <link rel="stylesheet" href="/static/style.css" />
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div>
+        <h1>RAG Cost-Optimized Demo</h1>
+        <p class="subtitle">
+          Slash re-indexing costs for a Foundry agent's knowledge base.
+        </p>
+        <p class="subtitle" style="margin-top: 8px;">
+          <a href="/static/playbook.html" style="color: #79c0ff; text-decoration: none; border-bottom: 1px dashed rgba(121,192,255,0.6);">
+            Open Optimization Playbook View
+          </a>
+        </p>
+      </div>
+      <div class="status-pill" id="statusPill" title="Backend status">loading…</div>
+    </div>
+  </header>
+
+  <main>
+    <!-- Dashboard -->
+    <section class="card dashboard">
+      <h2>Cost dashboard <span class="hint">since startup</span></h2>
+      <div class="kpis">
+        <div class="kpi">
+          <div class="kpi-label">Total saved (USD)</div>
+          <div class="kpi-value saved" id="kpiSaved">$0.000000</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Naive runs spent</div>
+          <div class="kpi-value bad" id="kpiNaive">$0.000000</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Smart runs spent</div>
+          <div class="kpi-value good" id="kpiSmart">$0.000000</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Indexed chunks</div>
+          <div class="kpi-value" id="kpiChunks">0</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Cache entries</div>
+          <div class="kpi-value" id="kpiCache">0</div>
+        </div>
+        <div class="kpi">
+          <div class="kpi-label">Embedding model</div>
+          <div class="kpi-value model" id="kpiModel">—</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Actions -->
+    <section class="card actions">
+      <h2>Re-index</h2>
+      <div class="action-row">
+        <button id="btnNaive" class="btn bad-btn">Naive Full Re-index</button>
+        <button id="btnSmart" class="btn good-btn">Smart Incremental Re-index</button>
+        <button id="btnClear" class="btn ghost">Clear cache + index</button>
+        <button id="btnReset" class="btn ghost">Reset corpus to seed</button>
+      </div>
+      <div class="last-run" id="lastRun">No runs yet. Try "Naive" then "Smart" twice.</div>
+    </section>
+
+    <!-- Scale Lab -->
+    <section class="card scale-card">
+      <h2>Scale Lab <span class="hint">generate big corpora &amp; project costs</span></h2>
+
+      <div class="scale-grid">
+        <!-- Generator -->
+        <div class="scale-panel">
+          <h3>1. Generate a synthetic corpus</h3>
+          <p class="muted">Creates deterministic technical prose so the indexer can be exercised on hundreds of MB. Resets cache + index automatically.</p>
+          <div class="action-row" id="presetRow"></div>
+          <div class="action-row" style="margin-top:8px">
+            <button id="btnMutate5"  class="btn small ghost">Mutate ~5% of docs</button>
+            <button id="btnMutate25" class="btn small ghost">Mutate ~25% of docs</button>
+            <button id="btnRemoveSynth" class="btn small ghost">Remove synthetic corpus</button>
+          </div>
+          <div class="last-run" id="genResult">No corpus generated yet.</div>
+        </div>
+
+        <!-- Projection -->
+        <div class="scale-panel">
+          <h3>2. Project to 5 GB / 50 GB / 1 TB</h3>
+          <p class="muted">Calibrates from the current corpus (tokens per MB, chunks per doc) and extrapolates linearly. No embeddings called.</p>
+          <div class="action-row">
+            <label class="control">
+              Daily churn (%)
+              <input id="churnPct" type="number" min="0.1" max="100" step="0.1" value="5" />
+            </label>
+            <label class="control">
+              Refreshes / year
+              <input id="refreshes" type="number" min="1" max="8760" value="365" />
+            </label>
+            <button id="btnProject" class="btn">Project costs</button>
+          </div>
+          <div id="calibrationLine" class="muted small-line"></div>
+          <div class="projection-wrap">
+            <table class="projection" id="projectionTable">
+              <thead>
+                <tr>
+                  <th>Corpus size</th>
+                  <th>Docs (est.)</th>
+                  <th>Tokens</th>
+                  <th>Naive / run</th>
+                  <th>Smart / run</th>
+                  <th>Annual naive</th>
+                  <th>Annual smart</th>
+                  <th>Annual saved</th>
+                </tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Corpus -->
+    <section class="card corpus-card">
+      <h2>Knowledge base documents <span class="hint" id="corpusCount"></span></h2>
+      <div class="corpus-layout">
+        <ul class="doc-list" id="docList"></ul>
+        <div class="doc-editor">
+          <div class="editor-header">
+            <input type="text" id="docId" placeholder="doc_id (lowercase, no spaces)" />
+            <button id="btnSave" class="btn small">Save</button>
+            <button id="btnDelete" class="btn small ghost">Delete</button>
+            <button id="btnNew" class="btn small ghost">New</button>
+          </div>
+          <textarea id="docText" placeholder="Pick a document, then edit it here. The smart re-index will only re-embed the chunks you change."></textarea>
+          <div class="editor-meta" id="editorMeta"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Query -->
+    <section class="card query-card">
+      <h2>Query the knowledge base</h2>
+      <div class="query-row">
+        <input type="text" id="queryInput" placeholder="Ask a question about the indexed documents…" />
+        <button id="btnQuery" class="btn">Search</button>
+      </div>
+      <div id="queryAnswer" class="answer"></div>
+      <ul id="queryHits" class="hits"></ul>
+    </section>
+  </main>
+
+  <footer>
+    <span>Local SQLite cache · in-process vector index · optional Azure AI Search + Foundry agent.</span>
+  </footer>
+
+  <script src="/static/app.js"></script>
+</body>
+</html>

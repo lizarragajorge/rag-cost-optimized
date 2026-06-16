@@ -1,0 +1,745 @@
+{
+  "eTag": null,
+  "id": "subscriptions/5a5f3109-1c5e-4207-b42f-43da13f7fde4/providers/Microsoft.CostManagement/query/c92a7c99-a8e6-484d-89b5-75c8127ac055",
+  "location": null,
+  "name": "c92a7c99-a8e6-484d-89b5-75c8127ac055",
+  "properties": {
+    "columns": [
+      {
+        "name": "Cost",
+        "type": "Number"
+      },
+      {
+        "name": "UsageDate",
+        "type": "Number"
+      },
+      {
+        "name": "ServiceName",
+        "type": "String"
+      },
+      {
+        "name": "Currency",
+        "type": "String"
+      }
+    ],
+    "nextLink": null,
+    "rows": [
+      [
+        9.86304,
+        20260603,
+        "API Management",
+        "USD"
+      ],
+      [
+        0.0,
+        20260603,
+        "Azure App Service",
+        "USD"
+      ],
+      [
+        18.552,
+        20260603,
+        "Azure Cognitive Search",
+        "USD"
+      ],
+      [
+        1.643808,
+        20260603,
+        "Azure Grafana Service",
+        "USD"
+      ],
+      [
+        0.0129032258064516,
+        20260603,
+        "Azure Monitor",
+        "USD"
+      ],
+      [
+        2.74e-06,
+        20260603,
+        "Bandwidth",
+        "USD"
+      ],
+      [
+        1.07876584225027,
+        20260603,
+        "Container Instances",
+        "USD"
+      ],
+      [
+        0.1666013328,
+        20260603,
+        "Container Registry",
+        "USD"
+      ],
+      [
+        2.28e-05,
+        20260603,
+        "Event Grid",
+        "USD"
+      ],
+      [
+        1.2,
+        20260603,
+        "Load Balancer",
+        "USD"
+      ],
+      [
+        0.00779803560709677,
+        20260603,
+        "Log Analytics",
+        "USD"
+      ],
+      [
+        0.00682744427621332,
+        20260603,
+        "Logic Apps",
+        "USD"
+      ],
+      [
+        3.957632,
+        20260603,
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.0031248704,
+        20260603,
+        "Storage",
+        "USD"
+      ],
+      [
+        0.24,
+        20260603,
+        "Virtual Network",
+        "USD"
+      ],
+      [
+        9.86304,
+        20260604,
+        "API Management",
+        "USD"
+      ],
+      [
+        0.0,
+        20260604,
+        "Azure App Service",
+        "USD"
+      ],
+      [
+        21.576,
+        20260604,
+        "Azure Cognitive Search",
+        "USD"
+      ],
+      [
+        2.46087089180946e-05,
+        20260604,
+        "Azure Cosmos DB",
+        "USD"
+      ],
+      [
+        1.643808,
+        20260604,
+        "Azure Grafana Service",
+        "USD"
+      ],
+      [
+        0.0129032258064516,
+        20260604,
+        "Azure Monitor",
+        "USD"
+      ],
+      [
+        3.64e-06,
+        20260604,
+        "Bandwidth",
+        "USD"
+      ],
+      [
+        1.07880411611021,
+        20260604,
+        "Container Instances",
+        "USD"
+      ],
+      [
+        0.1666013328,
+        20260604,
+        "Container Registry",
+        "USD"
+      ],
+      [
+        1.92e-05,
+        20260604,
+        "Event Grid",
+        "USD"
+      ],
+      [
+        1.2,
+        20260604,
+        "Load Balancer",
+        "USD"
+      ],
+      [
+        0.00799106025096774,
+        20260604,
+        "Log Analytics",
+        "USD"
+      ],
+      [
+        0.00689282317012516,
+        20260604,
+        "Logic Apps",
+        "USD"
+      ],
+      [
+        3.9618977375,
+        20260604,
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.0030145928,
+        20260604,
+        "Storage",
+        "USD"
+      ],
+      [
+        0.24,
+        20260604,
+        "Virtual Network",
+        "USD"
+      ],
+      [
+        9.86304,
+        20260605,
+        "API Management",
+        "USD"
+      ],
+      [
+        0.0,
+        20260605,
+        "Azure App Service",
+        "USD"
+      ],
+      [
+        26.616,
+        20260605,
+        "Azure Cognitive Search",
+        "USD"
+      ],
+      [
+        2.46087089180946e-05,
+        20260605,
+        "Azure Cosmos DB",
+        "USD"
+      ],
+      [
+        1.643808,
+        20260605,
+        "Azure Grafana Service",
+        "USD"
+      ],
+      [
+        0.0129032258064516,
+        20260605,
+        "Azure Monitor",
+        "USD"
+      ],
+      [
+        2.78e-06,
+        20260605,
+        "Bandwidth",
+        "USD"
+      ],
+      [
+        1.07880903086455,
+        20260605,
+        "Container Instances",
+        "USD"
+      ],
+      [
+        0.1666013328,
+        20260605,
+        "Container Registry",
+        "USD"
+      ],
+      [
+        7.2e-06,
+        20260605,
+        "Event Grid",
+        "USD"
+      ],
+      [
+        1.2,
+        20260605,
+        "Load Balancer",
+        "USD"
+      ],
+      [
+        0.00768935173032258,
+        20260605,
+        "Log Analytics",
+        "USD"
+      ],
+      [
+        0.00604918098449664,
+        20260605,
+        "Logic Apps",
+        "USD"
+      ],
+      [
+        3.9582857375,
+        20260605,
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.002421212,
+        20260605,
+        "Storage",
+        "USD"
+      ],
+      [
+        0.24,
+        20260605,
+        "Virtual Network",
+        "USD"
+      ],
+      [
+        9.86304,
+        20260606,
+        "API Management",
+        "USD"
+      ],
+      [
+        0.0,
+        20260606,
+        "Azure App Service",
+        "USD"
+      ],
+      [
+        26.616,
+        20260606,
+        "Azure Cognitive Search",
+        "USD"
+      ],
+      [
+        1.643808,
+        20260606,
+        "Azure Grafana Service",
+        "USD"
+      ],
+      [
+        0.0129032258064516,
+        20260606,
+        "Azure Monitor",
+        "USD"
+      ],
+      [
+        2.86e-06,
+        20260606,
+        "Bandwidth",
+        "USD"
+      ],
+      [
+        1.0788442095349,
+        20260606,
+        "Container Instances",
+        "USD"
+      ],
+      [
+        0.1666013328,
+        20260606,
+        "Container Registry",
+        "USD"
+      ],
+      [
+        2.16e-05,
+        20260606,
+        "Event Grid",
+        "USD"
+      ],
+      [
+        1.2,
+        20260606,
+        "Load Balancer",
+        "USD"
+      ],
+      [
+        0.00831885601096774,
+        20260606,
+        "Log Analytics",
+        "USD"
+      ],
+      [
+        0.00604918098449664,
+        20260606,
+        "Logic Apps",
+        "USD"
+      ],
+      [
+        3.958352,
+        20260606,
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.0023841984,
+        20260606,
+        "Storage",
+        "USD"
+      ],
+      [
+        0.24,
+        20260606,
+        "Virtual Network",
+        "USD"
+      ],
+      [
+        9.86304,
+        20260607,
+        "API Management",
+        "USD"
+      ],
+      [
+        0.0,
+        20260607,
+        "Azure App Service",
+        "USD"
+      ],
+      [
+        26.616,
+        20260607,
+        "Azure Cognitive Search",
+        "USD"
+      ],
+      [
+        1.643808,
+        20260607,
+        "Azure Grafana Service",
+        "USD"
+      ],
+      [
+        0.0129032258064516,
+        20260607,
+        "Azure Monitor",
+        "USD"
+      ],
+      [
+        2.74e-06,
+        20260607,
+        "Bandwidth",
+        "USD"
+      ],
+      [
+        1.07881058567006,
+        20260607,
+        "Container Instances",
+        "USD"
+      ],
+      [
+        0.1666013328,
+        20260607,
+        "Container Registry",
+        "USD"
+      ],
+      [
+        7.2e-06,
+        20260607,
+        "Event Grid",
+        "USD"
+      ],
+      [
+        0.002279288,
+        20260607,
+        "Foundry Models",
+        "USD"
+      ],
+      [
+        1.2,
+        20260607,
+        "Load Balancer",
+        "USD"
+      ],
+      [
+        0.0078968755716129,
+        20260607,
+        "Log Analytics",
+        "USD"
+      ],
+      [
+        0.00617503359168728,
+        20260607,
+        "Logic Apps",
+        "USD"
+      ],
+      [
+        3.9583104,
+        20260607,
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.0078871536,
+        20260607,
+        "Storage",
+        "USD"
+      ],
+      [
+        0.24,
+        20260607,
+        "Virtual Network",
+        "USD"
+      ],
+      [
+        9.86304,
+        20260608,
+        "API Management",
+        "USD"
+      ],
+      [
+        0.0,
+        20260608,
+        "Azure App Service",
+        "USD"
+      ],
+      [
+        34.68,
+        20260608,
+        "Azure Cognitive Search",
+        "USD"
+      ],
+      [
+        1.643808,
+        20260608,
+        "Azure Grafana Service",
+        "USD"
+      ],
+      [
+        0.0129032258064516,
+        20260608,
+        "Azure Monitor",
+        "USD"
+      ],
+      [
+        5.44e-06,
+        20260608,
+        "Bandwidth",
+        "USD"
+      ],
+      [
+        1.07875840211753,
+        20260608,
+        "Container Instances",
+        "USD"
+      ],
+      [
+        0.376019556,
+        20260608,
+        "Container Registry",
+        "USD"
+      ],
+      [
+        1.08e-05,
+        20260608,
+        "Event Grid",
+        "USD"
+      ],
+      [
+        0.018231121,
+        20260608,
+        "Foundry Models",
+        "USD"
+      ],
+      [
+        1.2,
+        20260608,
+        "Load Balancer",
+        "USD"
+      ],
+      [
+        0.0107785025716129,
+        20260608,
+        "Log Analytics",
+        "USD"
+      ],
+      [
+        0.00604918064922048,
+        20260608,
+        "Logic Apps",
+        "USD"
+      ],
+      [
+        7.1659016,
+        20260608,
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.0043801768,
+        20260608,
+        "Storage",
+        "USD"
+      ],
+      [
+        0.24,
+        20260608,
+        "Virtual Network",
+        "USD"
+      ],
+      [
+        19.72608,
+        20260609,
+        "API Management",
+        "USD"
+      ],
+      [
+        0.0,
+        20260609,
+        "Azure App Service",
+        "USD"
+      ],
+      [
+        64.994,
+        20260609,
+        "Azure Cognitive Search",
+        "USD"
+      ],
+      [
+        2.66190889409556,
+        20260609,
+        "Azure Grafana Service",
+        "USD"
+      ],
+      [
+        0.0225806451612903,
+        20260609,
+        "Azure Monitor",
+        "USD"
+      ],
+      [
+        6.88e-06,
+        20260609,
+        "Bandwidth",
+        "USD"
+      ],
+      [
+        1.74478194271915,
+        20260609,
+        "Container Instances",
+        "USD"
+      ],
+      [
+        0.6039806444,
+        20260609,
+        "Container Registry",
+        "USD"
+      ],
+      [
+        1.44e-05,
+        20260609,
+        "Event Grid",
+        "USD"
+      ],
+      [
+        0.001641872,
+        20260609,
+        "Foundry Models",
+        "USD"
+      ],
+      [
+        2.1,
+        20260609,
+        "Load Balancer",
+        "USD"
+      ],
+      [
+        0.015379752956129,
+        20260609,
+        "Log Analytics",
+        "USD"
+      ],
+      [
+        0.013241011685133,
+        20260609,
+        "Logic Apps",
+        "USD"
+      ],
+      [
+        7.204032,
+        20260609,
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.0056480736,
+        20260609,
+        "Storage",
+        "USD"
+      ],
+      [
+        0.42,
+        20260609,
+        "Virtual Network",
+        "USD"
+      ],
+      [
+        4.93152,
+        20260610,
+        "API Management",
+        "USD"
+      ],
+      [
+        0.0,
+        20260610,
+        "Azure App Service",
+        "USD"
+      ],
+      [
+        10.488,
+        20260610,
+        "Azure Cognitive Search",
+        "USD"
+      ],
+      [
+        8e-07,
+        20260610,
+        "Bandwidth",
+        "USD"
+      ],
+      [
+        0.0833006664,
+        20260610,
+        "Container Registry",
+        "USD"
+      ],
+      [
+        1.2e-06,
+        20260610,
+        "Event Grid",
+        "USD"
+      ],
+      [
+        0.00252237504,
+        20260610,
+        "Log Analytics",
+        "USD"
+      ],
+      [
+        1.005364,
+        20260610,
+        "Microsoft Defender for Cloud",
+        "USD"
+      ],
+      [
+        0.0006109184,
+        20260610,
+        "Storage",
+        "USD"
+      ]
+    ]
+  },
+  "sku": null,
+  "type": "Microsoft.CostManagement/query"
+}

@@ -1,0 +1,314 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>RAG Optimization Playbook</title>
+  <link rel="stylesheet" href="/static/playbook.css" />
+</head>
+<body>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header class="topbar">
+    <div class="brand">
+      <span class="dot"></span>
+      <span>RAG Optimization Playbook</span>
+    </div>
+    <nav class="nav-links">
+      <a href="/">Demo Dashboard</a>
+      <a href="/static/playbook.html" class="active">Playbook View</a>
+    </nav>
+  </header>
+
+  <main class="shell">
+    <section class="hero panel reveal">
+      <p class="eyebrow">For Copilot Studio + Azure AI Search teams</p>
+      <h1>Cut re-index spend while improving reliability</h1>
+      <p class="lead">
+        Use this page as your walkthrough script. It explains what to change,
+        why it lowers cost, and what operating pattern keeps the system stable.
+      </p>
+      <div class="hero-actions">
+        <a class="btn primary" href="/">Open Live Demo</a>
+        <button id="btnRefreshStatus" class="btn ghost">Refresh Environment Status</button>
+      </div>
+    </section>
+
+    <section class="panel reveal">
+      <div class="panel-head">
+        <h2>Current environment status</h2>
+        <span id="statusStamp" class="stamp">loading...</span>
+      </div>
+      <div class="status-grid">
+        <article class="status-card">
+          <h3>Embedding mode</h3>
+          <p id="statusEmbedding">-</p>
+        </article>
+        <article class="status-card">
+          <h3>Index backend</h3>
+          <p id="statusSearch">-</p>
+        </article>
+        <article class="status-card">
+          <h3>Agent path</h3>
+          <p id="statusFoundry">-</p>
+        </article>
+        <article class="status-card">
+          <h3>Model + cache</h3>
+          <p id="statusModel">-</p>
+        </article>
+      </div>
+      <ul id="riskList" class="risk-list"></ul>
+    </section>
+
+    <section class="two-col">
+      <article class="panel reveal">
+        <h2>Before: expensive pattern</h2>
+        <ul class="checklist bad">
+          <li>Full refresh re-embeds most content each run</li>
+          <li>Large embedding model used by default</li>
+          <li>No run-level telemetry for tokens and cost</li>
+          <li>Manual reruns from UI with weak guardrails</li>
+        </ul>
+      </article>
+
+      <article class="panel reveal">
+        <h2>After: platform-friendly pattern</h2>
+        <ul class="checklist good">
+          <li>Managed refresh endpoint does incremental indexing</li>
+          <li>Hash-based doc and chunk reuse cuts embedding calls</li>
+          <li>Power Automate or Logic Apps trigger the endpoint</li>
+          <li>Each run returns cost, token, and reliability signals</li>
+        </ul>
+      </article>
+    </section>
+
+    <section class="panel reveal">
+      <h2>Reference Your Current Snippets</h2>
+      <p class="muted">Pulled from the config you shared, then mapped to practical changes.</p>
+      <div class="snippet-grid">
+        <article>
+          <h3>Current snippet (high spend path)</h3>
+          <pre class="snippet"><code>"@odata.type": "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill"
+"deploymentId": "text-embedding-3-large"
+"dimensions": 3072
+
+"textSplitMode": "pages"
+"maximumPageLength": 3500
+"pageOverlapLength": 600</code></pre>
+        </article>
+        <article>
+          <h3>Recommended change</h3>
+          <pre class="snippet"><code>"deploymentId": "text-embedding-3-small"
+"dimensions": 1536
+
+Reduce overlap (start ~15%)
+Add managed incremental refresh endpoint:
+POST /refresh/incremental
+
+Return per-run telemetry:
+tokens_embedded, docs_skipped,
+cost_usd, duration_ms</code></pre>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel reveal">
+      <h2>Cost comparison: small vs large embeddings</h2>
+      <p class="muted">Same corpus, same churn, same refresh cadence. Model choice alone can materially change annual cost.</p>
+      <div class="calc-grid">
+        <label>
+          Corpus tokens per refresh
+          <input id="tokensInput" type="number" min="1000" step="1000" value="1200000000" />
+        </label>
+        <label>
+          Daily content churn (%)
+          <input id="churnInput" type="number" min="0.1" max="100" step="0.1" value="5" />
+        </label>
+        <label>
+          Refreshes per year
+          <input id="refreshInput" type="number" min="1" max="8760" step="1" value="365" />
+        </label>
+      </div>
+      <div class="calc-actions">
+        <button id="btnEstimate" class="btn primary">Recalculate</button>
+      </div>
+      <div class="comparison-wrap">
+        <table class="model-table">
+          <thead>
+            <tr>
+              <th>Scenario</th>
+              <th>Model</th>
+              <th>Per run</th>
+              <th>Annual</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Naive full refresh</td>
+              <td>text-embedding-3-small</td>
+              <td id="smallNaiveRun">$0</td>
+              <td id="smallNaiveAnnual">$0</td>
+            </tr>
+            <tr>
+              <td>Incremental refresh</td>
+              <td>text-embedding-3-small</td>
+              <td id="smallSmartRun" class="good">$0</td>
+              <td id="smallSmartAnnual" class="good">$0</td>
+            </tr>
+            <tr>
+              <td>Naive full refresh</td>
+              <td>text-embedding-3-large</td>
+              <td id="largeNaiveRun" class="bad">$0</td>
+              <td id="largeNaiveAnnual" class="bad">$0</td>
+            </tr>
+            <tr>
+              <td>Incremental refresh</td>
+              <td>text-embedding-3-large</td>
+              <td id="largeSmartRun" class="good">$0</td>
+              <td id="largeSmartAnnual" class="good">$0</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="results-grid">
+        <article>
+          <h3>Annual savings (small, incremental vs naive)</h3>
+          <p id="smallSavingsAnnual" class="money saved">$0</p>
+        </article>
+        <article>
+          <h3>Annual savings (large, incremental vs naive)</h3>
+          <p id="largeSavingsAnnual" class="money saved">$0</p>
+        </article>
+        <article>
+          <h3>Annual delta (large naive minus small naive)</h3>
+          <p id="modelDeltaAnnual" class="money bad">$0</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel reveal">
+      <h2>Recommended change plan</h2>
+      <div class="plan-grid">
+        <article>
+          <h3>1. Cost controls first</h3>
+          <ol>
+            <li>Use smaller embedding model unless eval proves otherwise.</li>
+            <li>Reduce overlap in chunking to avoid duplicate tokens.</li>
+            <li>Strip low-value OCR/noise before embedding.</li>
+          </ol>
+        </article>
+        <article>
+          <h3>2. Answer reliability guardrails</h3>
+          <ol>
+            <li>Use a fixed evaluation set to test consistency after every indexing change.</li>
+            <li>Require citation-backed answers for numeric or policy questions.</li>
+            <li>Track accuracy and contradiction rate in weekly review.</li>
+          </ol>
+        </article>
+        <article>
+          <h3>3. Team operating model</h3>
+          <ol>
+            <li>Copilot Studio stays focused on authoring and responses.</li>
+            <li>Power Automate triggers scheduled and manual refresh.</li>
+            <li>Ops monitors run summaries, not raw indexing internals.</li>
+          </ol>
+        </article>
+      </div>
+    </section>
+
+    <section class="panel reveal">
+      <h2>Priority Breakdown: What to change and why</h2>
+      <p class="muted">Organized by impact and implementation urgency, based on your current indexing snippets.</p>
+
+      <div class="priority-matrix">
+        <article class="priority-card p0 clickable-card" role="link" tabindex="0" data-href="/static/deepdives/p0-immediate-savings.html">
+          <h3>P0: Immediate savings and risk control</h3>
+          <div class="matrix-row">
+            <h4>Current</h4>
+            <p>Embedding skill uses text-embedding-3-large at 3072 dimensions and runs broad refresh operations.</p>
+          </div>
+          <div class="matrix-row">
+            <h4>Recommendation</h4>
+            <p>Default to text-embedding-3-small and make incremental refresh the standard run path.</p>
+          </div>
+          <div class="matrix-row">
+            <h4>Why</h4>
+            <p>This is the largest cost lever. Spend should scale with changed content, not total corpus size.</p>
+          </div>
+          <p class="card-cta">Open deep dive</p>
+        </article>
+
+        <article class="priority-card p1 clickable-card" role="link" tabindex="0" data-href="/static/deepdives/p1-cost-performance-tuning.html">
+          <h3>P1: Cost-performance tuning</h3>
+          <div class="matrix-row">
+            <h4>Current</h4>
+            <p>Chunking config uses high overlap (3500 page length, 600 overlap), and chunks include low-value OCR artifacts.</p>
+          </div>
+          <div class="matrix-row">
+            <h4>Recommendation</h4>
+            <p>Reduce overlap, clean noisy text before embedding, and keep a fixed quality evaluation set.</p>
+          </div>
+          <div class="matrix-row">
+            <h4>Why</h4>
+            <p>Lower overlap and cleaner content reduce duplicate tokens while preserving retrieval quality.</p>
+          </div>
+          <p class="card-cta">Open deep dive</p>
+        </article>
+
+        <article class="priority-card p1 clickable-card" role="link" tabindex="0" data-href="/static/deepdives/p1-observability-governance.html">
+          <h3>P1: Observability and governance</h3>
+          <div class="matrix-row">
+            <h4>Current</h4>
+            <p>Limited visibility into per-run token usage and cost by source/indexer.</p>
+          </div>
+          <div class="matrix-row">
+            <h4>Recommendation</h4>
+            <p>Return run telemetry for every refresh: docs changed, chunks embedded, tokens, cost, duration, failures.</p>
+          </div>
+          <div class="matrix-row">
+            <h4>Why</h4>
+            <p>Teams cannot manage or forecast cost without run-level telemetry and ownership signals.</p>
+          </div>
+          <p class="card-cta">Open deep dive</p>
+        </article>
+
+        <article class="priority-card p2 clickable-card" role="link" tabindex="0" data-href="/static/deepdives/p2-reliability-hardening.html">
+          <h3>P2: Answer consistency and accuracy</h3>
+          <div class="matrix-row">
+            <h4>Current</h4>
+            <p>Answer quality can vary across runs, and conflicting values are not always clearly separated in responses.</p>
+          </div>
+          <div class="matrix-row">
+            <h4>Recommendation</h4>
+            <p>Add quality gates: golden question set, citation checks, and conflict-aware response guidance before promoting refresh changes.</p>
+          </div>
+          <div class="matrix-row">
+            <h4>Why</h4>
+            <p>This directly improves trust: users get repeatable, evidence-backed answers instead of variable interpretations.</p>
+          </div>
+          <p class="card-cta">Open deep dive</p>
+        </article>
+
+        <article class="priority-card p3 clickable-card" role="link" tabindex="0" data-href="/static/deepdives/p3-strategic-optimization.html">
+          <h3>P3: Strategic optimization</h3>
+          <div class="matrix-row">
+            <h4>Current</h4>
+            <p>One broad index and enrichment profile handles many source types and use cases.</p>
+          </div>
+          <div class="matrix-row">
+            <h4>Recommendation</h4>
+            <p>Partition by domain when needed, rationalize enrichment skills, and use tiered refresh cadence by content volatility.</p>
+          </div>
+          <div class="matrix-row">
+            <h4>Why</h4>
+            <p>Improves long-term operability and relevance while containing unnecessary enrichment work.</p>
+          </div>
+          <p class="card-cta">Open deep dive</p>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <script src="/static/playbook.js"></script>
+</body>
+</html>

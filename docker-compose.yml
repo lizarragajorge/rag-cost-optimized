@@ -1,0 +1,14 @@
+services:
+  app:
+    build:
+      context: ./backend
+    ports:
+      - "8000:8000"
+    env_file:
+      - ./backend/.env
+    environment:
+      - FRONTEND_DIR=/app/frontend
+    volumes:
+      - ./backend/data:/app/data
+      - ./frontend:/app/frontend:ro
+    restart: unless-stopped
