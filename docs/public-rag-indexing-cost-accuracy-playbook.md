@@ -45,7 +45,7 @@ The following patterns frequently appear in enterprise RAG implementations and o
 - OCR artifacts, repeated file markers, or boilerplate content may be embedded even though they add little retrieval value.
 
 5. Formal answer-quality gates are missing
-- Solutions often rely on ad hoc testing instead of fixed question sets, citation checks, and contradiction review.
+- Solutions often rely on non-standardized testing workflows instead of fixed question sets, citation checks, and contradiction review.
 
 These gaps are not specific to any one product, tenant, or implementation. They are recurring patterns that can be addressed through model right-sizing, chunk tuning, content cleanup, and repeatable validation.
 

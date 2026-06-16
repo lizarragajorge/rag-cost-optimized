@@ -62,12 +62,12 @@
 
     <section class="two-col">
       <article class="panel reveal">
-        <h2>Before: expensive pattern</h2>
+        <h2>Current pattern</h2>
         <ul class="checklist bad">
           <li>Full refresh re-embeds most content each run</li>
           <li>Large embedding model used by default</li>
           <li>No run-level telemetry for tokens and cost</li>
-          <li>Manual reruns from UI with weak guardrails</li>
+          <li>Manual reruns from UI with limited release gates</li>
         </ul>
       </article>
 
@@ -326,6 +326,69 @@ cleanText() -> chunk() -> embed()</code></pre>
         </article>
 
       </div>
+    </section>
+
+    <section class="panel reveal">
+      <h2>Best practices: low-signal extracted text</h2>
+      <p class="muted">Clean low-value extraction artifacts before chunking to lower token volume without reducing useful retrieval context.</p>
+      <div class="practice-grid">
+        <article>
+          <h3>Common low-signal patterns</h3>
+          <ul class="detail-list">
+            <li>Repeated image and attachment marker lines</li>
+            <li>Boilerplate headers and footers repeated on every page</li>
+            <li>OCR artifacts, scanning noise, and broken wraps</li>
+            <li>Navigation fragments and duplicate whitespace blocks</li>
+          </ul>
+        </article>
+        <article>
+          <h3>Recommended implementation pattern</h3>
+          <pre class="mini-code"><code>extract -> cleanText -> chunk -> embed -> index
+
+cleanText rules:
+- remove repeated marker lines
+- normalize whitespace and wraps
+- preserve semantic headings
+- keep labels needed for citations</code></pre>
+          <p class="mini-note">Apply cleanup before chunking and hashing so incremental runs can reuse existing embeddings reliably.</p>
+        </article>
+      </div>
+      <ul class="detail-list">
+        <li>Compare token volume before and after cleanup as a release check.</li>
+        <li>Validate that citations still point to expected sources for key questions.</li>
+        <li>Tune rules in small steps and re-run the same golden questions each time.</li>
+      </ul>
+    </section>
+
+    <section class="panel reveal">
+      <h2>Best practices: answer-quality gates</h2>
+      <p class="muted">Use fixed gates to decide whether indexing, chunking, or model changes are safe to promote.</p>
+      <div class="practice-grid">
+        <article>
+          <h3>Gate categories</h3>
+          <ul class="detail-list">
+            <li>Answer correctness</li>
+            <li>Citation presence</li>
+            <li>Citation relevance</li>
+            <li>Contradiction handling</li>
+            <li>Consistency across repeated prompts</li>
+          </ul>
+        </article>
+        <article>
+          <h3>Suggested thresholds</h3>
+          <pre class="mini-code"><code>qualityGate = {
+  citationPassRate: ">= 95%",
+  contradictionRate: "<= 2%",
+  criticalQuestionPassRate: ">= 95%"
+}</code></pre>
+          <p class="mini-note">Store golden questions in source control (JSON or CSV) and run the same set after every material change.</p>
+        </article>
+      </div>
+      <ol class="workflow-list">
+        <li>Run golden questions in Copilot Studio test pane after each change.</li>
+        <li>Score pass/fail for correctness, citations, relevance, and contradiction handling.</li>
+        <li>Block promotion if thresholds are missed and add failures back into the question set.</li>
+      </ol>
     </section>
   </main>
 
