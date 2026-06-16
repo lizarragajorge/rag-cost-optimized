@@ -1,143 +1,174 @@
-# RAG Indexing Cost, Consistency, and Accuracy Playbook (Public)
+# RAG Indexing Cost, Consistency, and Accuracy Guidance
 
-This guide is safe to share publicly.
-It is written for teams using:
+This document provides implementation guidance for teams building retrieval-augmented generation (RAG) solutions with:
 - Microsoft Copilot Studio
 - Azure AI Search
 - Azure OpenAI embeddings
 
-It explains how to reduce indexing cost while improving answer consistency and citation accuracy.
+The focus is reducing indexing cost while improving answer consistency, citation quality, and operational maintainability.
 
-## Public Demo Walkthrough (8-10 minutes)
-Use this if you are presenting the approach to another team.
+## Scope
 
-1. Start with the problem in one sentence.
-- "We are paying full-price indexing repeatedly even when only a small portion of content changes."
+Use this guide when your solution has one or more of the following symptoms:
+- recurring high indexing costs
+- frequent re-index cycles with low net content change
+- variable answers for similar prompts
+- weak attribution between indexing runs and cost spikes
 
-2. Show the cost model quickly.
-- Explain that indexing cost is driven by embedded tokens and model price.
-- State that two levers matter most: model choice and amount of content re-embedded.
+## Reference Architecture
 
-3. Explain the before/after operating pattern.
-- Before: broad/full refresh behavior and expensive embedding defaults.
-- After: incremental refresh + right-sized embedding model + quality gates.
+1. Content sources (SharePoint, blob, files, etc.)
+2. Ingestion and refresh pipeline
+3. Chunking and embedding stage
+4. Azure AI Search index for retrieval
+5. Copilot Studio configured to ground responses on the index
 
-4. Walk through priorities (P0 to P3).
-- P0: immediate savings and control
-- P1: tuning + observability
-- P2: answer consistency and citation accuracy
-- P3: strategic scale optimization
+Recommended operating split:
+- Copilot Studio handles authoring and conversation experience
+- A managed refresh service handles indexing logic and guardrails
+- Automation (Power Automate or Logic Apps) triggers refresh schedules
 
-5. Demonstrate where quality is tested.
-- Copilot Studio test pane for end-user answers
-- Search Explorer for retrieval quality
-- Optional agent playground and API harness for regression checks
+## Priority Improvement Plan
 
-6. Close with rollout plan.
-- Week 1: baseline cost + quality
-- Week 2: incremental default path
-- Week 3: model/chunking A/B validation
-- Week 4: production gates and scorecards
+### P0: Immediate savings and control
 
-## Repo References (Safe to share)
-- Main project overview: `README.md`
-- Suggested baseline demo flow: `README.md` section "Suggested demo flow"
-- Portal walkthrough notes: `docs/portal-walkthrough.md`
-- Public playbook (this doc): `docs/public-rag-indexing-cost-accuracy-playbook.md`
-
-## Audience
-- Product owners and platform teams operating enterprise RAG
-- Teams seeing high recurring indexing costs
-- Teams that need consistent, evidence-backed answers
-
-## Problem Pattern
-A common high-cost pattern looks like this:
-1. A broad refresh or re-index operation runs frequently.
-2. Most content is re-chunked and re-embedded each run.
-3. A high-cost embedding model is used by default.
-4. Answer quality checks are informal, so consistency varies.
-
-## Priority Plan
-
-### P0: Immediate savings and risk control
 Current pattern:
-- Full or broad reprocessing during refresh cycles
-- Expensive embedding model as default
+- broad/full reprocessing during refresh cycles
+- expensive embedding model selected by default
 
 Recommended pattern:
-- Make incremental refresh the default path
-- Use a smaller embedding model by default (unless evaluation proves otherwise)
-- Treat full rebuild as an exception workflow
+- use incremental refresh as the default path
+- use a smaller embedding model by default unless evaluation proves otherwise
+- reserve full rebuild for schema/model migration events
 
-Why:
-- Indexing cost is driven by embedded tokens
-- Spend should scale with changed content, not full corpus size
+Implementation notes:
+```json
+{
+  "embedding": {
+    "deploymentId": "text-embedding-3-small",
+    "dimensions": 1536
+  },
+  "refreshMode": "incremental"
+}
+```
+
+Why this is first:
+- largest reduction in recurring cost
+- fastest time-to-value for most environments
 
 ### P1: Cost-performance tuning
+
 Current pattern:
-- High chunk overlap and noisy extracted text
+- high chunk overlap
+- low-signal extracted text included in embeddings
 
 Recommended pattern:
-- Reduce overlap to a tested baseline
-- Clean low-signal text (OCR artifacts, repetitive boilerplate)
-- Validate retrieval and answer quality with a fixed evaluation set
+- reduce overlap to an evaluated baseline
+- remove noisy OCR and boilerplate before embedding
+- validate retrieval quality with a fixed evaluation set
 
-Why:
-- Duplicate/noisy text increases embedding volume without improving usefulness
+Implementation notes:
+```json
+{
+  "textSplitMode": "pages",
+  "maximumPageLength": 2500,
+  "pageOverlapLength": 300
+}
+```
+
+```text
+cleanText -> chunk -> embed -> index
+```
+
+Why this matters:
+- reduces duplicated embedding tokens
+- improves retrieval precision and citation quality
 
 ### P1: Observability and governance
+
 Current pattern:
-- Aggregate cloud bill exists, but run-level attribution is weak
+- aggregate cloud billing exists
+- run-level attribution is limited
 
 Recommended pattern:
-- Emit run telemetry for every refresh
-- Track by source/profile and publish weekly scorecards
+- emit run-level telemetry for every refresh
+- track by source profile and publish periodic scorecards
 
-Suggested run output fields:
-- `runId`
-- `documentsSeen`
-- `documentsSkipped`
-- `chunksEmbedded`
-- `tokensEmbedded`
-- `estimatedCostUsd`
-- `durationMs`
-- `failedItems`
+Recommended run output shape:
+```json
+{
+  "runId": "...",
+  "documentsSeen": 0,
+  "documentsSkipped": 0,
+  "chunksEmbedded": 0,
+  "tokensEmbedded": 0,
+  "estimatedCostUsd": 0.0,
+  "durationMs": 0,
+  "failedItems": 0
+}
+```
 
-Why:
-- Teams cannot manage cost or quality drift without run-level visibility
+Why this matters:
+- enables cost anomaly detection
+- supports quality and FinOps governance
 
 ### P2: Answer consistency and accuracy
+
 Current pattern:
-- Similar prompts can return variable wording, missing citations, or mixed values
+- similar prompts may return inconsistent wording or conflicting values
+- citation quality is not always validated before promotion
 
 Recommended pattern:
-- Build a golden question set (30-50 representative questions)
-- Require citation checks for numeric/policy answers
-- Add contradiction checks and explicit multi-value handling
-- Gate production promotion on quality thresholds
+- maintain a golden question set
+- require citation checks for numeric/policy claims
+- enforce conflict-aware response behavior
+- gate promotion on quality thresholds
 
-Why:
-- Reliability for users means repeatable, evidence-backed answers
+Implementation notes:
+```json
+{
+  "qualityGate": {
+    "citationPassRate": ">= 95%",
+    "contradictionRate": "<= 2%"
+  }
+}
+```
+
+Why this matters:
+- improves user trust and answer reliability
+- reduces escalation due to contradictory responses
 
 ### P3: Strategic optimization
+
 Current pattern:
-- One broad index and enrichment profile for many domains
+- one broad index and enrichment profile for mixed domains
 
 Recommended pattern:
-- Segment by domain where needed
-- Use tiered refresh cadence by content volatility
-- Remove enrichment outputs that are not used in retrieval/answering
+- segment by domain when needed
+- apply tiered refresh cadence by content volatility
+- remove enrichment outputs that are not used in retrieval
 
-Why:
-- Improves long-term maintainability, relevance, and cost predictability
+Implementation notes:
+```json
+{
+  "refreshPolicy": {
+    "highVolatility": "daily",
+    "mediumVolatility": "weekly",
+    "archive": "monthly"
+  }
+}
+```
 
-## Model Cost Comparison Framework
-Use the same corpus and refresh cadence when comparing embedding models.
+Why this matters:
+- improves long-term maintainability and relevance quality
+- contains unnecessary enrichment overhead
+
+## Cost Estimation Model
 
 Per-run estimate:
 
 $$
-\text{run cost} = \frac{\text{tokens embedded}}{1,000,000} \times \text{price per 1M tokens}
+\text{run cost} = \frac{\text{tokens embedded}}{1{,}000{,}000} \times \text{price per 1M tokens}
 $$
 
 Annual estimate:
@@ -153,58 +184,45 @@ $$
 $$
 
 Interpretation:
-- Smaller embedding model lowers unit cost
-- Incremental refresh lowers embedded token volume
-- Combining both usually creates the largest annual savings
+- model selection controls unit cost
+- incremental refresh controls embedded volume
+- combining both usually yields the largest annual savings
 
-## Where to Test Questions and Answers
-Use all four layers for complete validation:
+## Validation Workflow
+
+Validate both retrieval and answer behavior across these layers:
 
 1. Copilot Studio test pane
-- Validate end-user answer quality and citation behavior
+- validate final user-facing answer quality and citations
 
 2. Azure AI Search Search Explorer
-- Validate retrieval quality (returned chunks and relevance)
+- validate retrieval quality and returned chunks
 
 3. Agent playground (if used)
-- Validate grounding and instruction behavior before broad rollout
+- validate grounding behavior and instruction changes
 
-4. Internal app/API query test harness
-- Run regression checks after indexing/model/chunking changes
+4. Internal API test harness
+- run regression checks after indexing/model/chunking changes
 
-## Practical Quality Gate (Recommended)
-Before promoting a refresh/model/chunking change:
-1. Run golden question set
-2. Check citation presence for critical claims
-3. Check citation relevance (does citation support answer)
-4. Check contradiction rate
-5. Compare against prior baseline and approve/reject
+## Quality Gate Checklist
 
-## Operating Model
-- Copilot Studio: authoring and user experience
-- Managed refresh service: indexing logic and guardrails
-- Automation (Power Automate/Logic Apps): schedule/manual triggers
-- Platform + product owners: shared scorecard for cost and quality
+Before promoting refresh/model/chunking changes:
+1. run golden question set
+2. verify citation presence for critical claims
+3. verify citation relevance
+4. measure contradiction rate
+5. compare against prior baseline and approve/reject
 
-## Safe Publishing Checklist
-Before publishing this guide publicly:
-1. Remove tenant names, subscription IDs, resource group names, hostnames, and project names
-2. Remove all credentials, keys, connection strings, and bearer tokens
-3. Remove internal file paths or document URLs that reveal company content
-4. Replace sample data with placeholders like `<search-service-name>` and `<project-name>`
-5. Confirm screenshots (if any) do not expose PII or sensitive metadata
+## Public Sharing Safety Checklist
 
-## Redaction Examples
-Do this:
+Before publishing externally:
+1. remove tenant names, subscription IDs, resource names, and hostnames
+2. remove credentials, keys, connection strings, and tokens
+3. remove internal document URLs and private file paths
+4. replace environment values with placeholders
+5. verify screenshots do not expose sensitive metadata
+
+Example safe placeholders:
 - `https://<search-service>.search.windows.net`
 - `<embedding-deployment-name>`
 - `<knowledge-index-name>`
-
-Do not publish this:
-- Real `ApplicationSecret` values
-- Full SharePoint/OneDrive internal document URLs
-- Real tenant/resource identifiers tied to production
-
----
-
-If you adapt this playbook internally, keep a private version with environment-specific details and a public version with redacted examples only.
